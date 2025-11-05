@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "node scripts/copyRedirect.cjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
