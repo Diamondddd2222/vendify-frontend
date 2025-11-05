@@ -8,8 +8,6 @@ import Signup from './Pages/SignUp/SignUp.jsx'
 import Login from './Pages/Login/Login.jsx'
 
 function App() {
- 
-
   return (
     <>
       <BrowserRouter>
@@ -19,6 +17,7 @@ function App() {
           <Route path='/Contact' element={<Contact/>}/>
           <Route path='/SignUp' element={<Signup/>}/>
           <Route path='/Login' element={<Login/>}/>
+          <Route path="*" element={<Home/>}/>
         </Routes>
       </BrowserRouter>
     </>
