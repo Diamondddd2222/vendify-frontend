@@ -1,0 +1,130 @@
+/* Background video */
+.bg-video-contact {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Overlay */
+.overlay-contact {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+}
+
+/* Container */
+.contact-container {
+  position: relative;
+  z-index: 2;
+  padding: 80px 10%;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  text-align: start;
+}
+
+/* Header */
+.contact-container h1 {
+  font-size: 2.5rem;
+  color: #ffcc00ef;
+  margin-bottom: 15px;
+}
+
+.contact-container p {
+  color: #dddddd;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+/* Form */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto 50px;
+  text-align: left;
+  background: transparent;
+  border: 1px solid #ffcc009c;
+  border-radius: 3px;
+  padding: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #ffcc009c;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #ffcc009c;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 3px;
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #cccccc;
+}
+
+/* Button */
+.contact-btn {
+  width: 100%;
+  background: transparent;
+  border: 2px solid #ffcc009c;
+  color: #ffcc009c;
+  padding: 12px;
+  font-size: 1.1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  background: #ffcc009c;
+  color: #000000;
+}
+
+/* Info */
+.contact-info {
+  margin-top: 40px;
+  line-height: 1.8;
+  color: #dddddd;
+}
+
+.highlight-contact {
+  color: #ffcc009c;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 60px 6%;
+  }
+
+  .contact-container h1 {
+    font-size: 2rem;
+  }
+
+  .contact-form {
+    padding: 25px;
+  }
+}

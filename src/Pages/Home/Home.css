@@ -1,0 +1,259 @@
+.home-main-container {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.logo {
+    max-width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+}
+
+.logo-container {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.hamburger-icon {
+    width: 15px;
+    height: 15px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 1.3s ease;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 28px;
+  
+}
+
+.navbar-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    /* background-color: #ffffff; */
+    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); */
+    padding: 0px 10px;
+}
+
+.hamburger-start-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.start-link {
+    color: #f3eaea;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.start-link:hover {
+    color: #dacc08;
+}
+
+/* --- Animated icon wrapper --- */
+.icon-wrapper {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+}
+
+.icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hidden icon (fades and shrinks away) */
+.icon.hide {
+    opacity: 0;
+    transform: scale(0.7) rotate(90deg);
+    pointer-events: none;
+}
+
+/* Visible icon (fades and rotates in) */
+.icon.show {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+
+.icon-wrapper:hover .hamburger-icon {
+    transform: scale(1.1);
+}
+
+/* ============================= */
+/* 🎥 VIDEO HERO SECTION STYLES  */
+/* ============================= */
+
+.background-video {
+    position: fixed; /* stays behind navbar and hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* Optional dark overlay for readability */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.699);
+    z-index: -1;
+}
+
+/* === Hero Section === */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 60px); /* full height minus navbar */
+    color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 1; /* above video */
+}
+
+.hero-content {
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.hero-btn {
+    background: #ffcc00;
+    color: #111;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.hero-btn:hover {
+    background: #ffd633;
+}
+
+/* =============================== */
+/* 📱 SIDEBAR MENU STYLES */
+/* =============================== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* hidden by default */
+  width: 250px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  transition: right 0.5s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cancel-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  color: #ffffff8e;
+  cursor: pointer;
+}
+
+.sidebar.open {
+  right: 0; /* slides in */
+}
+
+.sidebar ul {
+  
+  padding: 0;
+  margin: 0;
+  text-align: start;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  color: #ffcc00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}

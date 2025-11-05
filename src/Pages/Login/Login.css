@@ -1,0 +1,126 @@
+/* Background Video */
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Dark overlay */
+.overlay-login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+ background: rgba(0, 0, 0, 0.699);
+  z-index: 1;
+}
+
+/* Container */
+.login-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+
+/* Login Box */
+.login-box {
+  background: transparent;
+    border: 1px solid #ffcc0067;
+  padding: 50px 40px;
+  
+  width: 400px;
+  text-align: start;
+  backdrop-filter: blur(5px);
+  position: relative;
+  z-index: 3;
+}
+
+.login-box h2 {
+  color: #ffcc00;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.login-box p {
+  color: #ddd;
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+/* Form */
+.login-form .input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  display: block;
+  font-size: 0.9rem;
+  color: #ffcc00;
+  margin-bottom: 5px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1.3px solid #ffcc00;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login-form input::placeholder {
+  color: #ccc;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #ffcc00;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #ffd633;
+}
+
+/* Footer */
+.login-footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.login-footer a {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .login-box {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}

@@ -1,0 +1,119 @@
+/* Background video */
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Dark overlay */
+.overlay-about {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .93);
+  z-index: 1;
+}
+
+/* Main section */
+.about-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Text container */
+.about-container {
+  position: relative;
+  z-index: 2;
+  padding: 60px 10%;
+  background: transparent;
+  line-height: 1.7;
+}
+
+/* Header */
+.about-header {
+  text-align: start;
+  margin-bottom: 60px;
+}
+
+.about-header h1 {
+  font-size: 2.5rem;
+  color: #ffcc00;
+  margin-bottom: 10px;
+}
+
+.about-header p {
+  font-size: 1.1rem;
+  color: #f0f0f0;
+}
+
+/* Sections */
+.about-section {
+  margin-bottom: 50px;
+}
+
+.about-section h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+  border-left: 5px solid #ffcc00;
+  padding-left: 10px;
+}
+
+.about-section p {
+  font-size: 1rem;
+  color: #dddddd;
+  margin-bottom: 15px;
+}
+
+.about-section ul {
+  list-style: disc;
+  margin-left: 40px;
+  color: #dddddd;
+}
+
+.benefits-list li {
+  margin-bottom: 10px;
+}
+
+/* Contact */
+.about-contact {
+  text-align: start;
+  border-top: 1px solid #222;
+  padding-top: 30px;
+  margin-top: 40px;
+}
+
+.about-contact h2 {
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.highlight {
+  color: #ffcc00;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 40px 5%;
+  }
+
+  .about-header h1 {
+    font-size: 2rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.5rem;
+  }
+}
