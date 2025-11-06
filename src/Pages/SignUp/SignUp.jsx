@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import bgVideo from "../../assets/vendifyVideo.mp4";
 import LoadingSpinner from "../../components/Loader.jsx";
 import MessageBar from "../../components/MessageBar.jsx";
+import API from "../../utils/api.js";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
 
 
   const handleChange = (e) => {
@@ -25,6 +27,8 @@ const Signup = () => {
 
  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
     try {
       const res = await API.post("/api/users/register", formData);
       setMessage(res.data.message);
@@ -32,6 +36,11 @@ const Signup = () => {
       setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
       setMessage(error.response?.data?.message || "Registration failed");
+      setTimeout(() => setMessage('') , 10000);
+        setType("error");
+    } finally {
+        setLoading(false);
+
     }
   };
 

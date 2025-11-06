@@ -52,12 +52,17 @@ const Login = () => {
   return (
     
     <section className="login-container">
-        {loading && <LoadingSpinner />}
-      <MessageBar type={type} message={message} />
-      <video className="bg-video" autoPlay loop muted playsInline>
-        <source src={bgVideo} type="video/mp4" />
-      </video>
-      <div className="overlay-login"></div>
+        
+             {/* Background Video */}
+                   {loading && <LoadingSpinner />}
+                   <MessageBar type={type} message={message} />
+                  <video className="bg-video-auth" autoPlay loop muted playsInline>
+                    <source src={bgVideo} type="video/mp4" />
+                  </video>
+                  <div className="overlay-login"></div> {/* Background Video */}
+       
+        
+        
 
       <div className="login-box">
         <h2>Welcome Back</h2>

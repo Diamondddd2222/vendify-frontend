@@ -1,17 +1,16 @@
-// LoadingSpinner.jsx
 import React from "react";
 import "./Loader.css";
 
-const LoadingSpinner = () => {
+const Loader = () => {
   return (
-    <div className="loader-container">
-      <div className="shopping-bag">
+    <div className="loader-overlay">
+      <div className="bag-loader">
         <div className="bag-handle"></div>
         <div className="bag-body"></div>
+        <p className="loader-text">Loading Vendify...</p>
       </div>
-      <p className="loading-text">Loading your store...</p>
     </div>
   );
 };
 
-export default LoadingSpinner;
+export default Loader;
