@@ -7,6 +7,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    brandName: "",
     password: "",
   });
 
@@ -55,6 +56,19 @@ const Signup = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="brandName">Brand Name</label>
+            <input
+              type="text"
+              id="brandName"
+              name="brandName"
+              value={formData.brandName}
+              onChange={handleChange}
+              placeholder="Enter your brand name"
               required
             />
           </div>
