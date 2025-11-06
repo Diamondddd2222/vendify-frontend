@@ -1,5 +1,6 @@
 import React from "react";
 import "./About.css";
+import { Link } from "react-router-dom";
 import bgVideo from "../../assets/vendifyVideo.mp4";
 
 const About = () => {
@@ -105,6 +106,22 @@ const About = () => {
             Follow us: <span className="highlight">@vendifyofficial</span>
           </p>
         </div>
+        {/* Footer */}
+        <div className="about-footer">
+          <h3 className="vendify-footer-logo">Vendify</h3>
+          <p className="slogan-footer"> Empowering Africa’s Vendors, One Store at a Time.</p>
+
+          <div className="footer-links">
+            <Link to='/'>Home</Link>
+            <Link to='/Terms'>Terms & Privacy</Link>
+          </div>
+        </div>
+
+        <div className="copyRight">
+           <p className="rights">&copy; 2025 Vendify. All rights reserved.</p>
+        </div>
+
+       
       </div>
     </section>
   );
