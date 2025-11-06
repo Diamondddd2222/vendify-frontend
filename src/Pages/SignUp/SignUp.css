@@ -60,7 +60,7 @@
 
 .form-group label {
   display: block;
-  color: #ffcc00;
+  color: #ffcc00c7;
   font-weight: 500;
   margin-bottom: 6px;
 }
@@ -68,7 +68,7 @@
 .form-group input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ffcc00;
+  border: 1px solid #ffcc00dc;
   background: transparent;
   color: #fff;
   border-radius: 2px;
