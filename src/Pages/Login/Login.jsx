@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/Loader.jsx";
 import MessageBar from "../../components/MessageBar.jsx";
-import API from "../utils/api.js";
+import API from "../../utils/api.js";
 import bgVideo from "../../assets/vendifyVideo.mp4";
 
 const Login = () => {
