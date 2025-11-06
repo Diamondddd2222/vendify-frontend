@@ -1,29 +1,45 @@
 import React, { useState } from "react";
 import "./SignUp.css";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import bgVideo from "../../assets/vendifyVideo.mp4";
+import LoadingSpinner from "../../components/Loader.jsx";
+import MessageBar from "../../components/MessageBar.jsx";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     brandName: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [type, setType] = useState("");
+  const [message, setMessage] = useState("");
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signup data:", formData);
-    // Here you'll later connect to backend API
+    try {
+      const res = await API.post("/api/users/register", formData);
+      setMessage(res.data.message);
+      setType("success");
+      setTimeout(() => navigate("/dashboard"), 1500);
+    } catch (error) {
+      setMessage(error.response?.data?.message || "Registration failed");
+    }
   };
 
   return (
     <section className="auth-page">
       {/* Background Video */}
+       {loading && <LoadingSpinner />}
+       <MessageBar type={type} message={message} />
       <video className="bg-video-auth" autoPlay loop muted playsInline>
         <source src={bgVideo} type="video/mp4" />
       </video>
