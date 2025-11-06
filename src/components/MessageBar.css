@@ -22,10 +22,12 @@
 
 .message-bar.success {
   border-left: 5px solid #22c55e; /* green */
+  background-color: #51bb781a;
 }
 
 .message-bar.error {
   border-left: 5px solid #ef4444; /* red */
+    background-color: #ee77771a;
 }
 
 @keyframes slideDown {
