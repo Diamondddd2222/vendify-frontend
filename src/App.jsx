@@ -10,7 +10,7 @@ import Login from './Pages/Login/Login.jsx'
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter >
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path='/About' element={<About/>}/>
