@@ -33,6 +33,8 @@ const handleSubmit = async (e) => {
     // ✅ Save token and user data to localStorage
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("user", JSON.stringify(res.data.user));
+    console.log("User data saved to localStorage:", res.data.user);
+    console.log("Token saved to localStorage:", res.data.token);
 
     // ✅ Success feedback
     setType("success");

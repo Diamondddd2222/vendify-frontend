@@ -26,6 +26,7 @@ const Dashboard = () => {
 useEffect(() => {
   try {
     const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+    console.log("Stored user from localStorage:", storedUser);
     setUser(storedUser && Object.keys(storedUser).length ? storedUser : null);
   } catch (err) {
     console.error("Failed to parse user from localStorage:", err);
@@ -36,6 +37,8 @@ useEffect(() => {
     try {
       const res = await API.get("/api/users");
       setUsers(res.data);
+      console.log(res.data)
+      console.log(users)
     } catch (err) {
       console.error("Failed to load users", err);
     }
