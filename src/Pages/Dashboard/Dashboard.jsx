@@ -37,7 +37,7 @@ const Dashboard = () => {
         </div>
        
         {/* <h1 className="welcome-text">Welcome, <span className="highlight">{user?.name || "Vendor"}</span> 👋</h1> */}
-        <p>Grow your store and connect with vendors on <span className="highlight">Vendify</span></p>
+        <p>Grow your store and connect with vendors on <span className="highlight-p">Vendify</span></p>
       </header>
 
       {/* Stories Section */}

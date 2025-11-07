@@ -32,9 +32,14 @@
     margin-left: 15px;
 }
 .dashboard-header p {
-  color: #ccc;
-  font-size: 1.1rem;
+  color: #ccccccde;
+  font-size: .8rem;
   text-align: start;
+}
+.highlight-p {
+  color: #ffcc00;
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 .text-brand{
     font-weight: 500;
