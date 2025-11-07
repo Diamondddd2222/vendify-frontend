@@ -34,6 +34,11 @@ const handleSubmit = async (e) => {
     const res = await API.post("/api/users/register", formData);
     setMessage(res.data.message);
     setType("success");
+    // ✅ Save token and user data to localStorage
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+    console.log("User data saved to localStorage:", res.data.user);
+    console.log("Token saved to localStorage:", res.data.token);
 
     // Redirect after success
     setTimeout(() => navigate("/dashboard"), 5500);
