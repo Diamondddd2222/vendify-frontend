@@ -9,14 +9,14 @@
 /* HEADER */
 .dashboard-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .h-section{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 13px;
+    margin-bottom: 10px;
 }
 
 .notification-bell{
