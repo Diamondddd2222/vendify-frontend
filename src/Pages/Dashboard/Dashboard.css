@@ -16,17 +16,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 13px;
 }
 
 .notification-bell{
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 600;
     color:#ffd323;
     cursor: pointer;
 }
 .customer-support{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color:#ffcc00;
     cursor: pointer;
     margin-left: 15px;
