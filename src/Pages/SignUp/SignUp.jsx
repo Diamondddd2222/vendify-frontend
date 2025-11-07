@@ -40,13 +40,13 @@ const handleSubmit = async (e) => {
 
   } catch (error) {
     const backendData = error.response?.data;
-
-    // Handle multiple validation errors (from express-validator)
-    if (backendData?.errors && Array.isArray(backendData.errors)) {
-      setMessage(backendData.errors.join(", "));
-    } 
+ // Handle multiple validation errors (from express-validator)
+    // if (backendData?.errors && Array.isArray(backendData.errors)) {
+    //   setMessage(backendData.errors.join(", "));
+    // } 
+   
     // Handle single message error (custom server errors)
-    else if (backendData?.message) {
+    if (backendData?.message) {
       setMessage(backendData.message);
     } 
     // Fallback if no clear message
