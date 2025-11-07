@@ -39,7 +39,7 @@ const handleSubmit = async (e) => {
     setMessage("Login successful! Redirecting...");
 
     // ✅ Redirect user to dashboard after a short delay
-    setTimeout(() => navigate("/dashboard"), 1500);
+    setTimeout(() => navigate("/dashboard"), 9500);
 
   } catch (error) {
     const backendData = error.response?.data;
@@ -54,7 +54,8 @@ const handleSubmit = async (e) => {
     // }
     // Default fallback
     else {
-      setMessage("Login failed! Please try again.");
+      // setMessage("Login failed! Please try again.");
+      setMessage(backendData?.message || "Login failed! Please try again.");
     }
 
     setType("error");
