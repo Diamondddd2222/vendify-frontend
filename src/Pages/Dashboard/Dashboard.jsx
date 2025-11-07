@@ -6,22 +6,43 @@ const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
+//   useEffect(() => {
+//     const storedUser = JSON.parse(localStorage.getItem("user"));
+//     setUser(storedUser);
 
-    // Fetch all users for the "stories" section
-    const fetchUsers = async () => {
-      try {
-        const res = await API.get("/api/users");
-        setUsers(res.data);
-      } catch (err) {
-        console.error("Failed to load users", err);
-      }
-    };
+//     // Fetch all users for the "stories" section
+//     const fetchUsers = async () => {
+//       try {
+//         const res = await API.get("/api/users");
+//         setUsers(res.data);
+//       } catch (err) {
+//         console.error("Failed to load users", err);
+//       }
+//     };
 
-    fetchUsers();
-  }, []);
+//     fetchUsers();
+//   }, []);
+
+useEffect(() => {
+  try {
+    const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+    setUser(storedUser && Object.keys(storedUser).length ? storedUser : null);
+  } catch (err) {
+    console.error("Failed to parse user from localStorage:", err);
+    setUser(null);
+  }
+
+  const fetchUsers = async () => {
+    try {
+      const res = await API.get("/api/users");
+      setUsers(res.data);
+    } catch (err) {
+      console.error("Failed to load users", err);
+    }
+  };
+
+  fetchUsers();
+}, []);
 
   return (
     <div className="vendify-dashboard">
