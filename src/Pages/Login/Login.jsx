@@ -21,33 +21,51 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+ // Handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
-    try {
-      const res = await API.post("/api/users/login", formData);
+  try {
+    const res = await API.post("/api/users/login", formData);
 
-      // ✅ Save token to localStorage
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      setType("success");
-      setMessage("Login successful! Redirecting...");
-       setTimeout(() => navigate("/dashboard"), 1500);
-      // ✅ Redirect user to dashboard or homepage
-      navigate("/dashboard");
-    } catch (err) {
-     
-        setType("error");
-      setMessage(err.response?.data?.message || "Login failed! Please try again.")
-      
-    } finally {
-      setLoading(false);
-      setTimeout(() => setMessage(""), 3000); // Auto-hide after 3s
+    // ✅ Save token and user data to localStorage
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
+    // ✅ Success feedback
+    setType("success");
+    setMessage("Login successful! Redirecting...");
+
+    // ✅ Redirect user to dashboard after a short delay
+    setTimeout(() => navigate("/dashboard"), 1500);
+
+  } catch (error) {
+    const backendData = error.response?.data;
+
+    // Handle multiple validation errors (if backend sends them)
+    if (backendData?.errors && Array.isArray(backendData.errors)) {
+      setMessage(backendData.errors.join(", "));
     }
-  };
+    // Handle single error message
+    else if (backendData?.message) {
+      setMessage(backendData.message);
+    }
+    // Default fallback
+    else {
+      setMessage("Login failed! Please try again.");
+    }
+
+    setType("error");
+
+  } finally {
+    setLoading(false);
+    // Hide message after 4 seconds
+    setTimeout(() => setMessage(""), 4000);
+  }
+};
+
 
   return (
     

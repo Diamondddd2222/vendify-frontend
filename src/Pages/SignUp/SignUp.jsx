@@ -25,24 +25,43 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-    try {
-      const res = await API.post("/api/users/register", formData);
-      setMessage(res.data.message);
-      setType("success");
-      setTimeout(() => navigate("/dashboard"), 1500);
-    } catch (error) {
-      setMessage(error.response?.data?.message || "Registration failed");
-      setTimeout(() => setMessage('') , 10000);
-        setType("error");
-    } finally {
-        setLoading(false);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
+  try {
+    const res = await API.post("/api/users/register", formData);
+    setMessage(res.data.message);
+    setType("success");
+
+    // Redirect after success
+    setTimeout(() => navigate("/dashboard"), 5500);
+
+  } catch (error) {
+    const backendData = error.response?.data;
+
+    // Handle multiple validation errors (from express-validator)
+    if (backendData?.errors && Array.isArray(backendData.errors)) {
+      setMessage(backendData.errors.join(", "));
+    } 
+    // Handle single message error (custom server errors)
+    else if (backendData?.message) {
+      setMessage(backendData.message);
+    } 
+    // Fallback if no clear message
+    else {
+      setMessage("Registration failed. Please try again.");
     }
-  };
+
+    setType("error");
+    setTimeout(() => setMessage(""), 8000);
+
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <section className="auth-page">
