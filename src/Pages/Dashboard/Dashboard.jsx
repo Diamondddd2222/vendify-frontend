@@ -26,7 +26,7 @@ const Dashboard = () => {
       <header className="dashboard-header">
         <div className="h-section">
            <h1 className="text-brand">
-             Welcome, <span className="highlight">{user?.name || "Vendor"}</span> 
+             Hey, <span className="highlight">{user?.name || "Vendor"}</span> 
            </h1>
            <div className="h-icons">
             
