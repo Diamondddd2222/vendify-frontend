@@ -45,13 +45,13 @@ const handleSubmit = async (e) => {
     const backendData = error.response?.data;
 
     // Handle multiple validation errors (if backend sends them)
-    if (backendData?.errors && Array.isArray(backendData.errors)) {
-      setMessage(backendData.errors.join(", "));
-    }
+     if (backendData?.errors) {
+      setMessage(backendData.errors);
+    } 
     // Handle single error message
-    else if (backendData?.message) {
-      setMessage(backendData.message);
-    }
+    // else if (backendData?.message) {
+    //   setMessage(backendData.message);
+    // }
     // Default fallback
     else {
       setMessage("Login failed! Please try again.");
