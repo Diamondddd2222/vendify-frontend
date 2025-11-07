@@ -39,7 +39,7 @@ const handleSubmit = async (e) => {
     setMessage("Login successful! Redirecting...");
 
     // ✅ Redirect user to dashboard after a short delay
-    setTimeout(() => navigate("/dashboard"), 5500);
+    setTimeout(() => navigate("/dashboard"), 3500);
 
   } catch (error) {
     const backendData = error.response?.data;
