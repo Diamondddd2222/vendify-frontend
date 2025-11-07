@@ -1,0 +1,118 @@
+.vendify-dashboard {
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+  color: #222;
+  background: #fafafa;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  color: #111;
+}
+
+.dashboard-main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.create-store-card {
+  flex: 1;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.create-store-card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.create-btn {
+  margin-top: 1rem;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.create-btn:hover {
+  background: #2563eb;
+}
+
+/* Instagram-like stories */
+.user-stories {
+  flex: 1;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.stories-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.story img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid #3b82f6;
+  object-fit: cover;
+}
+
+.story p {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Trending store grid */
+.explore-section {
+  margin-top: 3rem;
+}
+
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.store-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.store-card:hover {
+  transform: translateY(-5px);
+}
+
+.store-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
