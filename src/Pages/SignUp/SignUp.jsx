@@ -41,14 +41,14 @@ const handleSubmit = async (e) => {
   } catch (error) {
     const backendData = error.response?.data;
  // Handle multiple validation errors (from express-validator)
-    // if (backendData?.errors && Array.isArray(backendData.errors)) {
-    //   setMessage(backendData.errors.join(", "));
-    // } 
+    if (backendData?.errors) {
+      setMessage(backendData.errors);
+    } 
    
     // Handle single message error (custom server errors)
-    if (backendData?.message) {
-      setMessage(backendData.message);
-    } 
+    // if (backendData?.message) {
+    //   setMessage(backendData.message);
+    // } 
     // Fallback if no clear message
     else {
       setMessage("Registration failed. Please try again.");
