@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API from "../../utils/api";
+import { FaRegBell } from "react-icons/fa";
+import { SlEarphonesAlt } from "react-icons/sl";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -22,7 +24,19 @@ const Dashboard = () => {
     <div className="dashboard-container">
       {/* Header */}
       <header className="dashboard-header">
-        <h1>Welcome, <span className="highlight">{user?.name || "Vendor"}</span> 👋</h1>
+        <div className="h-section">
+           <h1 className="text-brand">
+             Welcome, <span className="highlight">{user?.name || "Vendor"}</span> 
+           </h1>
+           <div className="h-icons">
+            
+              <FaRegBell className="notification-bell" />
+              <SlEarphonesAlt className="customer-support"/>
+           </div>
+           
+        </div>
+       
+        {/* <h1 className="welcome-text">Welcome, <span className="highlight">{user?.name || "Vendor"}</span> 👋</h1> */}
         <p>Grow your store and connect with vendors on <span className="highlight">Vendify</span></p>
       </header>
 

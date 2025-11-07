@@ -3,7 +3,7 @@
   background-color: #0e0e0e;
   color: #fff;
   font-family: "Poppins", sans-serif;
-  padding: 60px 8%;
+  padding: 30px 8%;
 }
 
 /* HEADER */
@@ -11,16 +11,39 @@
   text-align: center;
   margin-bottom: 60px;
 }
-.dashboard-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+
+.h-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.notification-bell{
+    font-size: 1.4rem;
+    font-weight: 700;
+    color:#ffd323;
+    cursor: pointer;
+}
+.customer-support{
+    font-size: 1.3rem;
+    color:#ffcc00;
+    cursor: pointer;
+    margin-left: 15px;
 }
 .dashboard-header p {
   color: #ccc;
   font-size: 1.1rem;
+  text-align: start;
+}
+.text-brand{
+    font-weight: 500;
+    font-size:1.4rem;
+    text-align: start;
 }
 .highlight {
   color: #ffcc00;
+  font-size: 1.3rem;
 }
 
 /* STORIES */
