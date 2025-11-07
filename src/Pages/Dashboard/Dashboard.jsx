@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from "../../utils/api";
 import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
+import bgVideo from "../../assets/vendifyVideo.mp4";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -22,6 +23,10 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+        <video className="bg-video-auth" autoPlay loop muted playsInline>
+                <source src={bgVideo} type="video/mp4" />
+              </video>
+              <div className="overlay-auth-dashboard"></div>
       {/* Header */}
       <header className="dashboard-header">
         <div className="h-section">

@@ -1,15 +1,40 @@
+.bg-video-auth {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Overlay */
+.overlay-auth-dashboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.884);
+  z-index: 1;
+}
+
 .dashboard-container {
+  position: relative; 
   min-height: 100vh;
   background-color: #0e0e0e;
   color: #fff;
   font-family: "Poppins", sans-serif;
   padding: 30px 4%;
+  z-index: 1;
 }
 
 /* HEADER */
 .dashboard-header {
+  position: relative; 
   text-align: center;
   margin-bottom: 40px;
+  z-index: 3;
 }
 
 .h-section{
@@ -53,7 +78,9 @@
 
 /* STORIES */
 .stories-section {
+     position: relative; 
   margin-bottom: 60px;
+  z-index: 3;
 }
 .stories-section h2 {
   font-size: 1.5rem;
@@ -108,11 +135,14 @@
 
 /* CREATE STORE */
 .create-store-section {
+     position: relative; 
   display: flex;
   justify-content: center;
   margin-bottom: 70px;
+    z-index: 3;
 }
 .create-store-card {
+     position: relative; 
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid #333;
   border-radius: 10px;
@@ -120,6 +150,7 @@
   width: 90%;
   text-align: center;
   transition: all 0.3s ease;
+  z-index: 3;
 }
 .create-store-card:hover {
   transform: scale(1.02);
@@ -150,20 +181,26 @@
 
 /* FEED */
 .vendor-feed h2 {
+     position: relative; 
   font-size: 1.5rem;
   margin-bottom: 20px;
+    z-index: 3;
 }
 .vendor-grid {
+        position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
+    z-index: 3;
 }
 .vendor-card {
+        position: relative;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid #333;
   border-radius: 15px;
   padding: 20px;
   transition: all 0.3s ease;
+    z-index: 3
 }
 .vendor-card:hover {
   transform: scale(1.03);
