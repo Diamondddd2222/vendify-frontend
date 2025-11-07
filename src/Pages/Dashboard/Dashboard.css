@@ -1,8 +1,168 @@
-/* Hide scrollbar but allow scroll */
-.scrollbar-hide::-webkit-scrollbar {
+.dashboard-container {
+  min-height: 100vh;
+  background-color: #0e0e0e;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  padding: 60px 8%;
+}
+
+/* HEADER */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.dashboard-header p {
+  color: #ccc;
+  font-size: 1.1rem;
+}
+.highlight {
+  color: #ffcc00;
+}
+
+/* STORIES */
+.stories-section {
+  margin-bottom: 60px;
+}
+.stories-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.stories-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+}
+.stories-container::-webkit-scrollbar {
   display: none;
 }
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+.story {
+  text-align: center;
+  flex-shrink: 0;
+}
+.story-ring {
+  background: linear-gradient(45deg, #ffcc00, #ff0066);
+  padding: 3px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.story-inner {
+  background: #111;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.story-text {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 600;
+}
+.story-name {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+/* CREATE STORE */
+.create-store-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+.create-store-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 40px;
+  width: 70%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.create-store-card:hover {
+  transform: scale(1.02);
+  border-color: #ffcc00;
+}
+.create-store-card h3 {
+  color: #ffcc00;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+.create-store-card p {
+  color: #ccc;
+  margin-bottom: 25px;
+}
+.create-btn {
+  background: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.create-btn:hover {
+  background: #ffd633;
+}
+
+/* FEED */
+.vendor-feed h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.vendor-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+.vendor-card:hover {
+  transform: scale(1.03);
+  border-color: #ffcc00;
+}
+.vendor-card h4 {
+  color: #ffcc00;
+  margin-bottom: 8px;
+}
+.vendor-card p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+.view-btn {
+  background: #ffcc00;
+  color: #000;
+  border: none;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.view-btn:hover {
+  background: #ffd633;
+}
+.loading-text {
+  color: #999;
 }
