@@ -33,7 +33,7 @@
 .dashboard-header {
   position: relative; 
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   z-index: 3;
 }
 
@@ -140,7 +140,7 @@
      padding: 10px 0;
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
     z-index: 3;
     width: 100%;
     background-color: #d1a700;
