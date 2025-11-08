@@ -180,7 +180,7 @@
   
   color: #e2df07;
   border: none;
-  padding: 10px 16px;
+  padding: 5px 16px;
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
@@ -192,7 +192,7 @@
 }
 .create-store-text{
     color: #000;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 1rem;
     margin-left: 10px;
 }
@@ -232,7 +232,7 @@
 
 .creating-store{
     display: flex;
-    gap: 60px;
+    gap: 70px;
     align-items: center;
 
 }
