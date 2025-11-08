@@ -80,6 +80,7 @@
 .stories-section {
      position: relative; 
   margin-bottom: 60px;
+  margin-top: 20px;
   z-index: 3;
 }
 .stories-section h2 {
