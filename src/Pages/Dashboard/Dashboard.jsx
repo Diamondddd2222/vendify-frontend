@@ -4,14 +4,15 @@ import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
 import bgVideo from "../../assets/vendifyVideo.mp4";
 import { AiFillSafetyCertificate } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { IoIosArrowForward } from "react-icons/io";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -23,6 +24,10 @@ const Dashboard = () => {
     };
     fetchUsers();
   }, []);
+
+    const navigateToCreatePage = () => {
+        navigate("/CreateStore");
+    };
 
   return (
     <div className="dashboard-container">
@@ -62,7 +67,7 @@ const Dashboard = () => {
 
             <div className="creating-store">
              <h3 className="create-store-text">Create Your Store</h3>
-             <button className="create-btn">Create Store</button>
+             <button onClick={navigateToCreatePage} className="create-btn">Create Store</button>
             </div>
         </div>
 

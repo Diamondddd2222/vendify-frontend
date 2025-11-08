@@ -7,6 +7,7 @@ import Contact from './Pages/Contact/Contact.jsx'
 import Signup from './Pages/SignUp/SignUp.jsx'
 import Login from './Pages/Login/Login.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
+import CreateStore from './Pages/CreateStore/CreateStore.jsx'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/Login' element={<Login/>}/>
           <Route path="*" element={<Home/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/CreateStore' element={<CreateStore/>}/>
         </Routes>
       </BrowserRouter>
     </>
