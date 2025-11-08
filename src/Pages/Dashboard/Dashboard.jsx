@@ -4,6 +4,7 @@ import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
 import bgVideo from "../../assets/vendifyVideo.mp4";
 import { AiFillSafetyCertificate } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import "./Dashboard.css";
 
@@ -53,9 +54,9 @@ const Dashboard = () => {
             <div className="your-store-link-sec">
                 <div className="link-txt">
                    <AiFillSafetyCertificate className="safety-icon"/>
-                   <p className="store-link">Your Store Link</p>
+                   <Link className="store-link">Your Store Link</Link>
                 </div>
-                <p className="view-store">View Store</p>
+                <Link className="view-store">View Store</Link>
             </div>
                
 
