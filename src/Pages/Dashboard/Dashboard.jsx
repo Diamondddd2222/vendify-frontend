@@ -3,6 +3,8 @@ import API from "../../utils/api";
 import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
 import bgVideo from "../../assets/vendifyVideo.mp4";
+import { AiFillSafetyCertificate } from "react-icons/ai";
+import { IoIosArrowForward } from "react-icons/io";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -45,6 +47,43 @@ const Dashboard = () => {
         <p>Grow your store and connect with vendors on <span className="highlight-p">Vendify</span></p>
       </header>
 
+      {/* Create Store */}
+      <section className="create-store-section">
+        <div className="create-store-card">
+            <div className="your-store-link-sec">
+                <div className="link-txt">
+                   <AiFillSafetyCertificate className="safety-icon"/>
+                   <p className="store-link">Your Store Link</p>
+                </div>
+                <p className="view-store">View Store</p>
+            </div>
+               
+
+            <div className="creating-store">
+             <h3 className="create-store-text">Create Your Store</h3>
+             <button className="create-btn">Create Store</button>
+            </div>
+        </div>
+
+        
+      </section>
+
+      {/* <div className="create-store-card"> 
+            <div className="store-first">
+               <p className="store-link">Your store link</p>
+                <h3>Create Your Store</h3>  
+            </div>
+          
+          <div className="store-second">
+           <p className="view-store-link">
+                View Store
+              
+            </p>
+            <button className="create-btn">Create Store</button>
+          </div>
+            
+        </div> */}
+
       {/* Stories Section */}
       <section className="stories-section">
         <h2>Vendors You May Know</h2>
@@ -68,17 +107,7 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* Create Store */}
-      <section className="create-store-section">
-        <div className="create-store-card">
-          <h3>Create Your Store</h3>
-          <p>
-            Set up your personal Vendify store, upload products, and start
-            building your trusted brand online.
-          </p>
-          <button className="create-btn">Create Store</button>
-        </div>
-      </section>
+    
 
       {/* Vendor Feed */}
       <section className="vendor-feed">
