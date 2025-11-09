@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CreateStore.css";
 import MessageBar from "../../components/MessageBar.jsx";
 import LoadingSpinner from "../../components/Loader.jsx";
@@ -7,13 +7,14 @@ import API from "../../utils/api"; // your axios instance with baseURL + token i
 
 const CreateStore = () => {
   const [form, setForm] = useState({
-    storeName: "",
+    name: "",
     category: "",
     description: "",
     email: "",
     phone: "",
     logo: null,
   });
+   const user = JSON.parse(localStorage.getItem("user"));
   const [errors, setErrors] = useState({});
   const [msg, setMsg] = useState("");
   const [storeLink, setStoreLink] = useState("");
@@ -27,6 +28,15 @@ const CreateStore = () => {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
   };
+
+
+
+useEffect(() => {
+  if (user?.email) {
+    setForm(prev => ({ ...prev, email: user.email }));
+  }
+}, [user?.email]);
+
 
     const validate = () => {
     const newErrors = {};
@@ -44,7 +54,7 @@ const CreateStore = () => {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-  setMessage("");
+  setMsg("");
   setType("");
     if (!validate()) {
         setType("error");
@@ -52,6 +62,11 @@ const CreateStore = () => {
     }
 
   try {
+  
+
+    setLoading(true);
+    console.log("Submitting form data:", form);
+      
     const data = new FormData();
     data.append("storeName", form.storeName);
     data.append("category", form.category);
@@ -70,7 +85,7 @@ const CreateStore = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
+     console.log("Sent:", form);
     setType("success");
     setMsg(res.data.message || "Store created successfully");
     // use slug returned by backend:
@@ -80,7 +95,8 @@ const CreateStore = () => {
     setType("error");
     setMsg(err.response?.data?.message || "Failed to create store");
   } finally {
-    setTimeout(() => setMessage(""), 6000);
+    setTimeout(() => setMsg(""), 6000);
+    setLoading(false);
   }
 };
 
@@ -105,7 +121,7 @@ const CreateStore = () => {
           <input
             type="text"
             name="name"
-            value={form.storeName}
+            value={form.name}
             onChange={handleChange}
             className={errors.name ? "input-error" : ""}
           />
