@@ -80,9 +80,14 @@ useEffect(() => {
 
     // Option B (explicit)
     const token = localStorage.getItem("token");
+    // Debug log the token and form data
+    console.log('Token:', token);
+    console.log('Form data entries:', [...data.entries()]);
+    
     const res = await API.post("/api/store/create", data, {
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
       },
     });
      console.log("Sent:", form);
