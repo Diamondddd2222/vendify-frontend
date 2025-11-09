@@ -58,7 +58,7 @@ useEffect(() => {
   setType("");
     if (!validate()) {
         setType("error");
-        return <MessageBar type={type} message={msg} />
+        return ;
     }
 
   try {
@@ -68,7 +68,7 @@ useEffect(() => {
     console.log("Submitting form data:", form);
       
     const data = new FormData();
-    data.append("storeName", form.storeName);
+    data.append("name", form.name);
     data.append("category", form.category);
     data.append("description", form.description || "");
     data.append("email", form.email);
@@ -93,7 +93,7 @@ useEffect(() => {
     setStoreLink(publicLink);
   } catch (err) {
     setType("error");
-    setMsg(err.response?.data?.message || "Failed to create store");
+    setMsg(err.response?.data?.msg || "Failed to create store");
   } finally {
     setTimeout(() => setMsg(""), 6000);
     setLoading(false);
