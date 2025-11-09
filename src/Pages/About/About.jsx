@@ -7,7 +7,7 @@ const About = () => {
   return (
     <section className="about-page">
       {/* Background video */}
-      <video className="bg-video" autoPlay loop muted playsInline>
+      <video className="bg-video" autoPlay loop muted playsInline preload="auto">
         <source src={bgVideo} type="video/mp4" />
       </video>
 

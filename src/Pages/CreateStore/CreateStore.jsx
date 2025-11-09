@@ -88,7 +88,7 @@ const CreateStore = () => {
     <div className="create-store-form">
         {loading && <LoadingSpinner />}
         {msg && <MessageBar type={type} message={msg} />}
-        <video className="bg-video-auth" autoPlay loop muted playsInline>
+        <video className="bg-video-auth" autoPlay loop muted playsInline preload="auto">
                 <source src={bgVideo} type="video/mp4" />
               </video>
               <div className="overlay-createPage"></div>

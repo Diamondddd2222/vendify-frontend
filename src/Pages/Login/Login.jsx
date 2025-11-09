@@ -77,7 +77,7 @@ const handleSubmit = async (e) => {
              {/* Background Video */}
                    {loading && <LoadingSpinner />}
                    <MessageBar type={type} message={message} />
-                  <video className="bg-video-auth" autoPlay loop muted playsInline>
+                  <video className="bg-video-auth" autoPlay loop muted playsInline preload="auto">
                     <source src={bgVideo} type="video/mp4" />
                   </video>
                   <div className="overlay-login"></div> {/* Background Video */}
