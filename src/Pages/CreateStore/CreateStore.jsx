@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./CreateStore.css";
 import MessageBar from "../../components/MessageBar.jsx";
 import LoadingSpinner from "../../components/Loader.jsx";
+import bgVideo from "../../assets/vendifyVideo.mp4";
 import API from "../../utils/api"; // your axios instance with baseURL + token interceptor
 
 const CreateStore = () => {
@@ -17,6 +18,7 @@ const CreateStore = () => {
   const [msg, setMsg] = useState("");
   const [storeLink, setStoreLink] = useState("");
   const [type, setType] = useState("");
+  const [loading, setLoading] = useState(false);
   const categories = ['Fashion']
   const handleChange = (e) => {
     if (e.target.files) {
@@ -86,6 +88,11 @@ const CreateStore = () => {
     <div className="create-store-form">
         {loading && <LoadingSpinner />}
         {msg && <MessageBar type={type} message={msg} />}
+        <video className="bg-video-auth" autoPlay loop muted playsInline>
+                <source src={bgVideo} type="video/mp4" />
+              </video>
+              <div className="overlay-createPage"></div>
+        
       <h2>Create Store</h2>
       <form onSubmit={handleSubmit}>
         {/* <input name="storeName" value={form.storeName} onChange={onChange} placeholder="Store name" required />
