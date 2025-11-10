@@ -236,10 +236,10 @@
 .safety-icon-container{
     position: relative;
 
-    width: 15px;
+    width: 12px;
     height:14px;
     border-radius: 50%;
-     background-color: #ccc;
+     background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
