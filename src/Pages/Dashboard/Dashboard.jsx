@@ -58,7 +58,10 @@ const Dashboard = () => {
         <div className="create-store-card">
             <div className="your-store-link-sec">
                 <div className="link-txt">
-                   <AiFillSafetyCertificate className="safety-icon"/>
+                    <div className="safety-icon-container">
+                        <AiFillSafetyCertificate className="safety-icon"/>
+                    </div>
+                   
                    <Link className="store-link">Your Store Link</Link>
                 </div>
                 <Link className="view-store">View Store</Link>
