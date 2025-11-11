@@ -3,14 +3,16 @@ import API from "../../utils/api";
 import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
 import bgVideo from "../../assets/vendifyVideo.mp4";
-import { AiFillSafetyCertificate } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
 
+import { Link, useNavigate } from "react-router-dom";
+import TrueDashboard from "./TrueDashboard.jsx";
+import FalseDashboard from "./FalseDashboard.jsx";
 import { IoIosArrowForward } from "react-icons/io";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
+  const [storeLink, setStoreLink] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,9 +27,15 @@ const Dashboard = () => {
     fetchUsers();
   }, []);
 
-    const navigateToCreatePage = () => {
-        navigate("/CreateStore");
-    };
+  useEffect(() => {
+   const storeLink= localStorage.getItem("Storelink");
+    setStoreLink(storeLink)
+    console.log(storeLink);
+  }, []);
+
+    // const navigateToCreatePage = () => {
+    //     navigate("/CreateStore");
+    // };
 
   return (
     <div className="dashboard-container">
@@ -55,7 +63,10 @@ const Dashboard = () => {
 
       {/* Create Store */}
       <section className="create-store-section">
-        <div className="create-store-card">
+        {
+            !storeLink ? <FalseDashboard/>  : <TrueDashboard/>
+        }
+        {/* <div className="create-store-card">
             <div className="your-store-link-sec">
                 <div className="link-txt">
                     <div className="safety-icon-container">
@@ -72,7 +83,7 @@ const Dashboard = () => {
              <h3 className="create-store-text">Create Your Store</h3>
              <button onClick={navigateToCreatePage} className="create-btn">Create Store</button>
             </div>
-        </div>
+        </div> */}
 
         
       </section>

@@ -1,0 +1,14 @@
+.view-close{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.store-full-link{
+    width: 150px;
+    white-space: nowrap;       /* keep on a single line */
+  overflow: hidden;          /* hide overflow */
+  text-overflow: ellipsis;   /* show "..." at the end */
+  display: inline-block; 
+  font-weight: 400;
+}

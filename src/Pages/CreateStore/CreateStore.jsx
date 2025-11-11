@@ -95,6 +95,8 @@ useEffect(() => {
     setMsg(res.data.message || "Store created successfully");
     // use slug returned by backend:
     const publicLink = `${window.location.origin}/stores/${res.data.store.storeLink}`;
+    localStorage.setItem('Storelink', publicLink)
+    console.log(publicLink)
     setStoreLink(publicLink);
   } catch (err) {
     setType("error");
