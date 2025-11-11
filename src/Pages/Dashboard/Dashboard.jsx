@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [storeLink, setStoreLink] = useState("");
   const [storeId, setStoreId] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
-  const store = JSON.parse(localStorage.getItem("store"));
+//   const store = JSON.parse(localStorage.getItem("store"));
   const [storeBrand, setStoreBrand] = useState("");
   console.log("User data in Dashboard:", user)
   const navigate = useNavigate();
