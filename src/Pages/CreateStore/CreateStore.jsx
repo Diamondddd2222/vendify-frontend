@@ -85,7 +85,7 @@ useEffect(() => {
     console.log('Token:', token);
     console.log('Form data entries:', [...data.entries()]);
     
-    const res = await API.post("/api/store/create", data, {
+    const res = await API.post("/api/stores/create", data, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
