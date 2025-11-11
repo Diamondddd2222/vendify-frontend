@@ -99,6 +99,7 @@ useEffect(() => {
     const storeId = res.data.store.userId;
     console.log("Store created with ID:", storeId);
     const publicLink = `${window.location.origin}/stores/${res.data.store.storeLink}`;
+    localStorage.setItem('store', res.data.store)
     localStorage.setItem('Storelink', publicLink)
     localStorage.setItem("storeId", res.data.store._id);
     console.log(publicLink)
