@@ -29,45 +29,45 @@ const Dashboard = () => {
     fetchUsers();
   }, []);
 
-//   useEffect(() => {
-//   const fetchUserStore = async () => {
-//     try {
-//      console.log("Fetching store for user:", user?.email);
-//       const token = localStorage.getItem("token");
-//       console.log("Using token:", token);
-//       const res = await API.get("/api/stores");
-//       console.log("Store fetch response:", res.data);
-//       const store = res.data.store;
-//       const link = `${window.location.origin}/stores/${store.storeLink}`;
-//       setStoreLink(link);
-//       console.log("Fetched store link:", storeLink);
-//       setStoreId(store._id);
+  useEffect(() => {
+  const fetchUserStore = async () => {
+    try {
+     console.log("Fetching store for user:", user?.email);
+      const token = localStorage.getItem("token");
+      console.log("Using token:", token);
+      const res = await API.get("/api/stores");
+      console.log("Store fetch response:", res.data);
+      const store = res.data.store;
+      const link = `${window.location.origin}/stores/${store.storeLink}`;
+      setStoreLink(link);
+      console.log("Fetched store link:", storeLink);
+      setStoreId(store._id);
 
       
-//       localStorage.setItem("Storelink", link);
-//       localStorage.setItem("storeId", store._id);
-//     } catch (err) {
-//       console.error("User has no store yet:", err.response?.data?.message);
-//       setStoreLink(null);
-//     }
-//   };
-
-//   fetchUserStore();
-// }, []);
-
-useEffect(() => {
-    const storedLink = localStorage.getItem("Storelink");
-    const storedId = localStorage.getItem("storeId");
-    if (storedLink && storedId) {
-        setStoreLink(storedLink);
-        setStoreId(storedId);
-        console.log("Loaded store link from localStorage:", storedLink);
-    }else{
-        setStoreLink("");
-        setStoreId("");
-
+      localStorage.setItem("Storelink", link);
+      localStorage.setItem("storeId", store._id);
+    } catch (err) {
+      console.error("User has no store yet:", err.response?.data?.message);
+      setStoreLink(null);
     }
-}, [ storeId]);
+  };
+
+  fetchUserStore();
+}, []);
+
+// useEffect(() => {
+//     const storedLink = localStorage.getItem("Storelink");
+//     const storedId = localStorage.getItem("storeId");
+//     if (storedLink && storedId) {
+//         setStoreLink(storedLink);
+//         setStoreId(storedId);
+//         console.log("Loaded store link from localStorage:", storedLink);
+//     }else{
+//         setStoreLink("");
+//         setStoreId("");
+
+//     }
+// }, [ storeId]);
 
 
 //   useEffect(() => {
