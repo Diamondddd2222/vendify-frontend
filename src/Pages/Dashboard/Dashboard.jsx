@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import API from "../../utils/api";
 import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
@@ -7,13 +7,14 @@ import bgVideo from "../../assets/vendifyVideo.mp4";
 import { Link, useNavigate } from "react-router-dom";
 import TrueDashboard from "./TrueDashboard.jsx";
 import FalseDashboard from "./FalseDashboard.jsx";
-import { IoIosArrowForward } from "react-icons/io";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [storeLink, setStoreLink] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
+  const [storeBrand, setStoreBrand] = useState("");
+  console.log("User data in Dashboard:", user)
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUsers = async () => {
@@ -27,10 +28,28 @@ const Dashboard = () => {
     fetchUsers();
   }, []);
 
+//   useEffect(() => {
+//     if (user?._Id) {
+//       setStoreBrand(user.brandName);
+//       const link = `${window.location.origin}/stores/${user.storeBrand}`;
+//       setStoreLink(link);
+//       localStorage.setItem("Storelink", link);
+//     } else {
+//       setStoreLink(null);
+//     }
+//      }, []);
+//     if 
+//    const storeLink= localStorage.getItem("Storelink");
+//     setStoreLink(storeLink)
+//     console.log(storeLink);
+ 
+
+  // Load store link from localStorage
   useEffect(() => {
-   const storeLink= localStorage.getItem("Storelink");
-    setStoreLink(storeLink)
-    console.log(storeLink);
+    const savedLink = localStorage.getItem("Storelink");
+    if (savedLink) {
+      setStoreLink(savedLink);
+    }
   }, []);
 
     // const navigateToCreatePage = () => {
@@ -64,7 +83,7 @@ const Dashboard = () => {
       {/* Create Store */}
       <section className="create-store-section">
         {
-            !storeLink ? <FalseDashboard/>  : <TrueDashboard/>
+            !storeLink ? <FalseDashboard/>  : <TrueDashboard />
         }
         {/* <div className="create-store-card">
             <div className="your-store-link-sec">
