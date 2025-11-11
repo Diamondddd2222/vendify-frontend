@@ -35,6 +35,9 @@ const handleSubmit = async (e) => {
     localStorage.setItem("user", JSON.stringify(res.data.user));
     console.log("User data saved to localStorage:", res.data.user);
     console.log("Token saved to localStorage:", res.data.token);
+    // Remove any old store info
+localStorage.removeItem("Storelink");
+localStorage.removeItem("storeId");
 
     // ✅ Success feedback
     setType("success");
