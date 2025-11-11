@@ -62,8 +62,12 @@ useEffect(() => {
         setStoreLink(storedLink);
         setStoreId(storedId);
         console.log("Loaded store link from localStorage:", storedLink);
+    }else{
+        setStoreLink("");
+        setStoreId("");
+
     }
-}, [storeLink, storeId]);
+}, [ storeId]);
 
 
 //   useEffect(() => {
