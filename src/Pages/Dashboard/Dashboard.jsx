@@ -130,7 +130,7 @@ useEffect(() => {
       {/* Create Store */}
       <section className="create-store-section">
         {
-            !storeLink ? <FalseDashboard/>  : <TrueDashboard storeLink={storeLink} storeId={storeId}/>
+           storeLink ?  <TrueDashboard storeLink={storeLink} storeId={storeId}/>: <FalseDashboard/>  
         }
         {/* <div className="create-store-card">
             <div className="your-store-link-sec">
