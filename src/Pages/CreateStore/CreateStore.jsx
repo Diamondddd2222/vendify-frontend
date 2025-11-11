@@ -98,8 +98,10 @@ useEffect(() => {
     // use slug returned by backend:
     const storeId = res.data.store.userId;
     console.log("Store created with ID:", storeId);
+    const myData = res.data.store;
     const publicLink = `${window.location.origin}/stores/${res.data.store.storeLink}`;
-    localStorage.setItem('store', res.data.store)
+    localStorage.setItem("store", JSON.stringify(myData));
+    // localStorage.setItem('store', res.data.store)
     localStorage.setItem('Storelink', publicLink)
     localStorage.setItem("storeId", res.data.store._id);
     console.log(publicLink)
