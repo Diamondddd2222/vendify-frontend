@@ -5,14 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { LuEyeClosed } from "react-icons/lu";
 import "./TrueDashboard.css";
 
-const TrueDashboard = ({ storeLink }) => {
+const TrueDashboard = ({ storeLink,storeId }) => {
     // const [storeLink, setStoreLink] = useState("");
    
     // const brandName = JSON.parse(localStorage.getItem("user"))?.brandName;
     // console.log("Brand name:", brandName);
     // const fullStoreLink = `${window.location.origin}/stores/${brandName}`;
     // console.log("Full store link:", fullStoreLink);
-     if (!storeLink) return null; // safe check
+     if (!storeLink && storeId) return null; // safe check
 //    useEffect(() => {
 //      const storeLink= localStorage.getItem("Storelink");
 //      const user = JSON.parse(localStorage.getItem("user"));

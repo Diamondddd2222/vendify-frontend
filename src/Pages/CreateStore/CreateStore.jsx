@@ -4,8 +4,9 @@ import MessageBar from "../../components/MessageBar.jsx";
 import LoadingSpinner from "../../components/Loader.jsx";
 import bgVideo from "../../assets/vendifyVideo.mp4";
 import API from "../../utils/api"; // your axios instance with baseURL + token interceptor
-
+import { useNavigate } from "react-router-dom";
 const CreateStore = () => {
+    const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -93,11 +94,17 @@ useEffect(() => {
      console.log("Sent:", form);
     setType("success");
     setMsg(res.data.message || "Store created successfully");
+    
     // use slug returned by backend:
+    const storeId = res.data.store.userId;
+    console.log("Store created with ID:", storeId);
     const publicLink = `${window.location.origin}/stores/${res.data.store.storeLink}`;
     localStorage.setItem('Storelink', publicLink)
+    localStorage.setItem("storeId", res.data.store._id);
     console.log(publicLink)
     setStoreLink(publicLink);
+    // Redirect to dashboard after a short delay
+    setTimeout(() => navigate("/dashboard"), 3000);
   } catch (err) {
     setType("error");
     setMsg(err.response?.data?.message || "Failed to create store");

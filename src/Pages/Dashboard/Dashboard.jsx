@@ -1,4 +1,4 @@
- import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import API from "../../utils/api";
 import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
@@ -11,6 +11,7 @@ import "./Dashboard.css";
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [storeLink, setStoreLink] = useState("");
+  const [storeId, setStoreId] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
   const [storeBrand, setStoreBrand] = useState("");
   console.log("User data in Dashboard:", user)
@@ -26,6 +27,35 @@ const Dashboard = () => {
     };
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+  const fetchUserStore = async () => {
+    try {
+     console.log("Fetching store for user:", user?.email);
+      const token = localStorage.getItem("token");
+      console.log("Using token:", token);
+      const res = await API.get("/api/store/my-store", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+     console.log("Store fetch response:", res.data);
+      const store = res.data.store;
+      const link = `${window.location.origin}/stores/${store.storeLink}`;
+      setStoreLink(link);
+      console.log("Fetched store link:", storeLink);
+      setStoreId(store._id);
+
+      // optionally persist for later
+      localStorage.setItem("Storelink", link);
+      localStorage.setItem("storeId", store._id);
+    } catch (err) {
+      console.error("User has no store yet:", err.response?.data?.message);
+      setStoreLink(null);
+    }
+  };
+
+  fetchUserStore();
+}, []);
+
 
 //   useEffect(() => {
 //     if (user?._Id) {
@@ -44,12 +74,17 @@ const Dashboard = () => {
  
 
   // Load store link from localStorage
-  useEffect(() => {
-    const savedLink = localStorage.getItem("Storelink");
-    if (savedLink) {
-      setStoreLink(savedLink);
-    }
-  }, []);
+//   useEffect(() => {
+    
+//     const savedLink = localStorage.getItem("Storelink");
+//     const storedId = localStorage.getItem("storeId");
+//     console.log("Retrieved store link from localStorage:", savedLink);
+//     if (savedLink && storeId) {
+//       setStoreLink(savedLink);
+//       setStoreId(storedId);
+      
+//     }
+//   }, []);
 
     // const navigateToCreatePage = () => {
     //     navigate("/CreateStore");
@@ -82,7 +117,7 @@ const Dashboard = () => {
       {/* Create Store */}
       <section className="create-store-section">
         {
-            !storeLink ? <FalseDashboard/>  : <TrueDashboard storeLink={storeLink} />
+            !storeLink ? <FalseDashboard/>  : <TrueDashboard storeLink={storeLink} storeId={storeId}/>
         }
         {/* <div className="create-store-card">
             <div className="your-store-link-sec">
