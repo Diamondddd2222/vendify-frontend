@@ -5,14 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { LuEyeClosed } from "react-icons/lu";
 import "./TrueDashboard.css";
 
-const TrueDashboard = () => {
-    const [storeLink, setStoreLink] = useState("");
-    const [user, setUser] = useState(null);
-    const brandName = JSON.parse(localStorage.getItem("user"))?.brandName;
-    console.log("Brand name:", brandName);
-    const fullStoreLink = `${window.location.origin}/stores/${brandName}`;
-    console.log("Full store link:", fullStoreLink);
-
+const TrueDashboard = ({ storeLink }) => {
+    // const [storeLink, setStoreLink] = useState("");
+   
+    // const brandName = JSON.parse(localStorage.getItem("user"))?.brandName;
+    // console.log("Brand name:", brandName);
+    // const fullStoreLink = `${window.location.origin}/stores/${brandName}`;
+    // console.log("Full store link:", fullStoreLink);
+     if (!storeLink) return null; // safe check
 //    useEffect(() => {
 //      const storeLink= localStorage.getItem("Storelink");
 //      const user = JSON.parse(localStorage.getItem("user"));
@@ -22,13 +22,11 @@ const TrueDashboard = () => {
 //       console.log(user);
 //     }, [ user?.email]); 
 
-     const navigateToCreatePage = () => {
-        navigate("/CreateStore");
-    };
+   
 
     // Function to copy link to clipboard
   const copyLink = () => {
-    navigator.clipboard.writeText(fullStoreLink);
+    navigator.clipboard.writeText(storeLink);
     alert("Store link copied to clipboard!");
   };
 
@@ -52,7 +50,7 @@ const TrueDashboard = () => {
                    
     
                 <div className="creating-store">
-                <Link className="store-full-link">{fullStoreLink} </Link>
+                <Link className="store-full-link">{storeLink} </Link>
                  <button onClick={copyLink} className="create-btn">Copy Link</button>
                 </div>
             </div>

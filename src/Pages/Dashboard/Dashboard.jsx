@@ -3,7 +3,6 @@ import API from "../../utils/api";
 import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
 import bgVideo from "../../assets/vendifyVideo.mp4";
-
 import { Link, useNavigate } from "react-router-dom";
 import TrueDashboard from "./TrueDashboard.jsx";
 import FalseDashboard from "./FalseDashboard.jsx";
@@ -83,7 +82,7 @@ const Dashboard = () => {
       {/* Create Store */}
       <section className="create-store-section">
         {
-            !storeLink ? <FalseDashboard/>  : <TrueDashboard />
+            !storeLink ? <FalseDashboard/>  : <TrueDashboard storeLink={storeLink} />
         }
         {/* <div className="create-store-card">
             <div className="your-store-link-sec">
