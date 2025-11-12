@@ -204,6 +204,25 @@
   transition: background 0.3s;
   
 } */
+ .store-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #d1a700; /* your theme yellow */
+  box-shadow: 0 0 10px rgba(209, 167, 0, 0.4); /* soft yellow glow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #000; /* fallback background */
+  display: block;
+  margin: 0 auto; /* center horizontally */
+}
+
+/* Hover effect for interactivity */
+.store-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(209, 167, 0, 0.6);
+}
+
 
 .create-btn {
   position: relative;

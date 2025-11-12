@@ -15,11 +15,30 @@ const Dashboard = () => {
   const [storeId, setStoreId] = useState("");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
+  // const [store, setStore] = useState({});
+  const [stores, setStores] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 //   const store = JSON.parse(localStorage.getItem("store"));
   const [storeBrand, setStoreBrand] = useState("");
   console.log("User data in Dashboard:", user)
   const navigate = useNavigate();
+
+
+ useEffect(() => {
+  const fetchStores = async () => {
+    try {
+      const res = await API.get("/api/stores/reqstores"); // 👈 your getStores endpoint
+      setStores(res.data.allStores); // make sure to match your backend response
+      console.log("Fetched stores:", res.data.allStores);
+    } catch (err) {
+      console.error("Failed to load stores", err);
+    }
+  };
+  fetchStores();
+}, []);
+
+
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -45,7 +64,7 @@ const Dashboard = () => {
       setStoreLink(link);
       console.log("Fetched store link:", storeLink);
       setStoreId(store._id);
-
+      setStore(store)
       
       localStorage.setItem("Storelink", link);
       localStorage.setItem("storeId", store._id);
@@ -192,11 +211,13 @@ const Dashboard = () => {
                 <div className="story-ring">
                   <div className="story-inner">
                     <span className="story-text">
+                      
                       {vendor.name.charAt(0).toUpperCase()}
                     </span>
                   </div>
                 </div>
                 <p className="story-name">{vendor.name.split(" ")[0]}</p>
+                
               </div>
             ))
           ) : (
