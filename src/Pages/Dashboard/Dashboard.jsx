@@ -15,7 +15,7 @@ const Dashboard = () => {
   const [storeId, setStoreId] = useState("");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
-  // const [store, setStore] = useState({});
+  const [store, setStore] = useState({});
   const [stores, setStores] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 //   const store = JSON.parse(localStorage.getItem("store"));
@@ -24,18 +24,35 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
 
- useEffect(() => {
+//  useEffect(() => {
+//   const fetchStores = async () => {
+//     try {
+//       const res = await API.get("/api/stores/reqstores"); // 👈 your getStores endpoint
+//       const fetchedStores = res.data.allStores;
+//       setStores(fetchedStores);
+//       console.log("Fetched stores:", res.data.allStores);
+//       console.log('stores', stores)
+//     } catch (err) {
+//       console.error("Failed to load stores", err);
+//     }
+//   };
+//   fetchStores();
+// }, []);
+
+useEffect(() => {
   const fetchStores = async () => {
     try {
-      const res = await API.get("/api/stores/reqstores"); // 👈 your getStores endpoint
-      setStores(res.data.allStores); // make sure to match your backend response
-      console.log("Fetched stores:", res.data.allStores);
+      const res = await API.get("/api/stores/reqstores");
+      const fetchedStores = res.data.allStores;
+      setStores(fetchedStores);
+      console.log("Fetched stores directly:", fetchedStores); // log here
     } catch (err) {
       console.error("Failed to load stores", err);
     }
   };
   fetchStores();
 }, []);
+
 
 
 
@@ -205,25 +222,32 @@ const Dashboard = () => {
       <section className="stories-section">
         <h2>Vendors You May Know</h2>
         <div className="stories-container">
-          {users.length > 0 ? (
-            users.map((vendor, index) => (
-              <div className="story" key={index}>
-                <div className="story-ring">
-                  <div className="story-inner">
-                    <span className="story-text">
-                      
-                      {vendor.name.charAt(0).toUpperCase()}
-                    </span>
-                  </div>
-                </div>
-                <p className="story-name">{vendor.name.split(" ")[0]}</p>
-                
-              </div>
-            ))
-          ) : (
-            <p className="loading-text">Loading vendors...</p>
-          )}
+  {stores.length > 0 ? (
+    stores.map((store, index) => (
+      <div className="story" key={index}>
+        <div className="story-ring">
+          <div className="story-inner">
+            {store.logoUrl ? (
+              <img
+                src={store.logoUrl}
+                alt={store.name}
+                className="story-logo"
+              />
+            ) : (
+              <span className="story-text">
+                {store.name.charAt(0).toUpperCase()}
+              </span>
+            )}
+          </div>
         </div>
+        <p className="story-name">{store.name.split(" ")[0]}</p>
+      </div>
+    ))
+  ) : (
+    <p className="loading-text">Loading stores...</p>
+  )}
+</div>
+
       </section>
 
     
