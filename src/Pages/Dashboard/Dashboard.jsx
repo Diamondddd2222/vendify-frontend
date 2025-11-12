@@ -6,12 +6,15 @@ import bgVideo from "../../assets/vendifyVideo.mp4";
 import { Link, useNavigate } from "react-router-dom";
 import TrueDashboard from "./TrueDashboard.jsx";
 import FalseDashboard from "./FalseDashboard.jsx";
+import MessageBar from "../../components/MessageBar.jsx";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [storeLink, setStoreLink] = useState("");
   const [storeId, setStoreId] = useState("");
+  const [type, setType] = useState("");
+  const [message, setMessage] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));
 //   const store = JSON.parse(localStorage.getItem("store"));
   const [storeBrand, setStoreBrand] = useState("");
@@ -48,8 +51,16 @@ const Dashboard = () => {
       localStorage.setItem("storeId", store._id);
     } catch (err) {
       console.error("User has no store yet:", err.response?.data?.message);
+      setTimeout(() => {
+        setType("pending");
+        setMessage("Create a store to get started!");
+      }, 1000);
+      setMessage("")
       setStoreLink(null);
-    }
+    }finally {
+    // Hide message after 4 seconds
+    setTimeout(() => setMessage(""), 4000);
+  }
   };
 
   fetchUserStore();
@@ -105,6 +116,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      <MessageBar type={type} message={message} />
         <video className="bg-video-auth" autoPlay loop muted playsInline>
                 <source src={bgVideo} type="video/mp4" />
               </video>

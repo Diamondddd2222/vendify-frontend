@@ -11,4 +11,13 @@
   text-overflow: ellipsis;   /* show "..." at the end */
   display: inline-block; 
   font-weight: 400;
+  color: black;
+}
+
+.store-link{
+    text-decoration: none;
+}
+
+.view-store{
+  text-decoration: none;
 }

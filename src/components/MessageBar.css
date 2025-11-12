@@ -30,6 +30,11 @@
     background-color: #e0545493;
 }
 
+.message-bar.pending {
+  border-left: 5px solid #f59e0b; /* yellow */
+  background-color: #f5c542bb;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;

@@ -136,16 +136,32 @@
 
 /* CREATE STORE */
 .create-store-section {
-     position: relative;
-     border-radius: 10px; 
-     padding: 10px 0;
+  position: relative;
+  border-radius: 10px; 
+  padding: 10px 0;
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
-    z-index: 3;
-    width: 100%;
-    background-color: #d1a700;
+  z-index: 3;
+  width: 100%;
+  background-color: #d1a700;
+
+  /* Animation properties */
+  animation: slideInLeft 1.4s ease-out forwards;
+  opacity: 0; /* Ensures it fades in smoothly */
 }
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .create-store-card {
   position: relative; 
   /* background-color: #ffcc00; */
@@ -176,7 +192,7 @@
   color: #ccc;
   margin-bottom: 25px;
 } */
-.create-btn {
+/* .create-btn {
   background: #020100;
   
   color: #e2df07;
@@ -187,10 +203,64 @@
   cursor: pointer;
   transition: background 0.3s;
   
+} */
+
+.create-btn {
+  position: relative;
+  background: #020100;
+  color: #e2df07;
+  border: none;
+  padding: 5px 16px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  overflow: hidden; /* Ensures the animation stays within the button */
+  z-index: 1;
 }
-.create-btn:hover {
-  background: #e2b204;
+
+/* Moving gradient border */
+.create-btn::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(120deg, #e2df07, #000, #e2df07, #000);
+  background-size: 300% 300%;
+  border-radius: 30px;
+  z-index: -1;
+  animation: borderMove 3s linear infinite;
 }
+
+/* Dark background layer to keep button body clean */
+.create-btn::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: #020100;
+  border-radius: 23px;
+  z-index: -1;
+}
+
+/* Gradient movement */
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 .create-store-text{
     color: #000;
     font-weight: 500;
