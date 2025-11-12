@@ -423,9 +423,10 @@
   margin-bottom: 10px;
 }
 .view-btn {
-  background: #ffcc00;
-  color: #000;
-  border: none;
+  background-color: #000;
+  /* background: #ffcc00; */
+  color: #ffffff;
+  border: 1px solid #bd9804cc;
   padding: 6px 15px;
   border-radius: 20px;
   font-weight: 600;
