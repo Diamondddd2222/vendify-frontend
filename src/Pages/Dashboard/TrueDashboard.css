@@ -5,7 +5,7 @@
 }
 
 .store-full-link{
-    width: 200px;
+    width: 180px;
     white-space: nowrap;       /* keep on a single line */
   overflow: hidden;          /* hide overflow */
   text-overflow: ellipsis;   /* show "..." at the end */
