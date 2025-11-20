@@ -39,6 +39,16 @@
 } */
 
 /* Container for safety icon + link */
+.store-link{
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 9999; 
+  color: white;
+  font-size: 0.7rem;
+  margin-top: 4px;
+}
+
 .link-txt {
   display: flex;
   gap: 5px;
