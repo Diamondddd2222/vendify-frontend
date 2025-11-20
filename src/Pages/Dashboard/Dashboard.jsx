@@ -220,7 +220,7 @@ useEffect(() => {
 
       {/* Stories Section */}
       <section className="stories-section">
-        <h2>Vendors You May Know</h2>
+        <h2>Vendor's Status</h2>
         <div className="stories-container">
   {stores.length > 0 ? (
     stores.map((store, index) => (
