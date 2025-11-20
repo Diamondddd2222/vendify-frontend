@@ -55,7 +55,7 @@ const TrueDashboard = ({ storeLink,storeId }) => {
     
                 <div className="creating-store">
                 <Link className="store-full-link">{storeLink} </Link>
-                 <button onClick={copyLink} className="create-btn">Copy Link</button>
+                 <button onClick={copyLink} className="create-btn-true">Copy Link</button>
                 </div>
             </div>
   )
