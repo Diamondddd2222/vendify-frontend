@@ -1,0 +1,83 @@
+/* ---------- BASE LAYOUT ---------- */
+
+.create-store-card {
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/* Top Section: link + view store */
+.your-store-link-sec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  flex-wrap: wrap; /* key fix */
+}
+
+.link-txt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap; /* prevents overlap */
+}
+
+.store-link {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.view-store {
+  text-decoration: underline;
+  font-size: 0.85rem;
+  
+}
+
+/* Bottom section: Create text + button */
+.creating-store {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* key fix */
+  gap: 10px;
+}
+
+.create-store-text {
+  font-size: 1rem;
+}
+
+.create-btn {
+  background: #020100;
+  color: #e2df07;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 400;
+  border: none;
+  width: 100%;
+}
+
+/* ---------- RESPONSIVE FIX (UNDER 400px) ---------- */
+@media (max-width: 400px) {
+  .your-store-link-sec {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .creating-store {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .view-store {
+    margin-left: 0;  /* ensures no floating */
+  }
+
+  .create-btn {
+    text-align: center;
+    width: 100%;
+  }
+}
