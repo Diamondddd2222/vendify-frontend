@@ -4,6 +4,11 @@
     align-items: center;
 }
 
+.link-txt{
+  display: flex;
+  gap: 5px;
+}
+
 .store-full-link{
     width: 180px;
     white-space: nowrap;       /* keep on a single line */
@@ -16,6 +21,12 @@
 
 .store-link{
     text-decoration: none;
+     
+}
+
+.view-close{
+  display: flex;
+  gap: 3px;
 }
 
 .view-status{

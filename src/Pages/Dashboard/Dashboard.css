@@ -278,7 +278,7 @@
   transition: background 0.3s;
   overflow: hidden; /* Ensures the animation stays within the button */
   z-index: 1;
-}
+} 
 
 /* Moving gradient border */
 .create-btn::before {
