@@ -73,7 +73,7 @@
 
 /* Store full link */
 .store-full-link {
-  width: 100%;
+  /* width: 100%; */
   max-width: 180px;
   white-space: nowrap;
   overflow: hidden;
