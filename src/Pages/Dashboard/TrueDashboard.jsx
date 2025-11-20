@@ -22,7 +22,11 @@ const TrueDashboard = ({ storeLink,storeId }) => {
 //       console.log(user);
 //     }, [ user?.email]); 
 
-   
+   const navigate = useNavigate();
+
+  const directToStatusPage = () => {
+    navigate('/Status')
+  }
 
     // Function to copy link to clipboard
   const copyLink = () => {
@@ -45,7 +49,7 @@ const TrueDashboard = ({ storeLink,storeId }) => {
                          <LuEyeClosed width={10} />
                        </div>    
                     </div>
-                    <Link className="view-store">Go to store</Link>
+                    <Link  className="view-status" to='/Status'>Add status</Link>
                 </div>
                    
     

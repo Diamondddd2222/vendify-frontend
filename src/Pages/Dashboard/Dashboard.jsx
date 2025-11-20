@@ -22,8 +22,7 @@ const Dashboard = () => {
 //   const store = JSON.parse(localStorage.getItem("store"));
   const [storeBrand, setStoreBrand] = useState("");
   console.log("User data in Dashboard:", user)
-  const navigate = useNavigate();
-
+  
 
 //  useEffect(() => {
 //   const fetchStores = async () => {

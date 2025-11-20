@@ -8,6 +8,8 @@ import Signup from './Pages/SignUp/SignUp.jsx'
 import Login from './Pages/Login/Login.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
 import CreateStore from './Pages/CreateStore/CreateStore.jsx'
+import StatusPage from './Pages/StatusPage/statusPage.jsx'
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="*" element={<Home/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/CreateStore' element={<CreateStore/>}/>
+          <Route path='/Status' element={<StatusPage/>}/>
         </Routes>
       </BrowserRouter>
     </>
