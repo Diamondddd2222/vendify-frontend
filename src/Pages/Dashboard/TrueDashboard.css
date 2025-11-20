@@ -24,4 +24,5 @@
   position: relative;
   z-index: 9999;   /* sits above everything */
   color: white;
+  font-size: .7rem;
 }
