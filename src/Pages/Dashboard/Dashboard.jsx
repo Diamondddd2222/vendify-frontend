@@ -8,6 +8,7 @@ import TrueDashboard from "./TrueDashboard.jsx";
 import FalseDashboard from "./FalseDashboard.jsx";
 import MessageBar from "../../components/MessageBar.jsx";
 import "./Dashboard.css";
+import Loader from "../../components/Loader.jsx";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -220,7 +221,7 @@ useEffect(() => {
 
       {/* Stories Section */}
       <section className="stories-section">
-        <h2>Vendors Status</h2>
+        <h2>Recent updates</h2>
         <div className="stories-container">
   {stores.length > 0 ? (
     stores.map((store, index) => (
@@ -244,7 +245,7 @@ useEffect(() => {
       </div>
     ))
   ) : (
-    <p className="loading-text">Loading stores...</p>
+    <p className="loading-text"><Loader/></p>
   )}
 </div>
 
@@ -254,7 +255,7 @@ useEffect(() => {
 
       {/* Vendor Feed */}
       <section className="vendor-feed">
-        <h2>Discover Vendors</h2>
+        <h2>Vendors You May Know</h2>
         <div className="vendor-grid">
           {users.slice(0, 6).map((vendor, i) => (
             <div className="vendor-card" key={i}>
