@@ -45,7 +45,7 @@ const TrueDashboard = ({ storeLink,storeId }) => {
                         </div>
 
                        <div className="view-close">
-                         <Link className="store-link">Available Link</Link>
+                         <Link className="store-link-true">Available Link</Link>
                          <LuEyeClosed width={10} />
                        </div>    
                     </div>
