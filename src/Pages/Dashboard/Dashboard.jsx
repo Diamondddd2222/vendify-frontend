@@ -71,36 +71,84 @@ useEffect(() => {
   useEffect(() => {
   const fetchUserStore = async () => {
     try {
-     console.log("Fetching store for user:", user?.email);
+      console.log("Fetching store for user:", user?.email);
       const token = localStorage.getItem("token");
       console.log("Using token:", token);
+
       const res = await API.get("/api/stores");
       console.log("Store fetch response:", res.data);
+
       const store = res.data.store;
-      const link = `${window.location.origin}/stores/${store.storeLink}`;
-      setStoreLink(link);
-      console.log("Fetched store link:", storeLink);
+
+      // -------------- NEW CLEAN WWW LINK FORMAT ----------------
+      const url = new URL(window.location.href);
+
+      // force hostname to always include www.
+      const hostname = `www.${url.hostname.replace(/^www\./, "")}`;
+
+      const publicLink = `${hostname}/stores/${store.storeLink}`;
+      console.log("Public WWW link:", publicLink);
+
+      // ----------------------------------------------------------
+
+      setStoreLink(publicLink);
       setStoreId(store._id);
-      setStore(store)
-      
-      localStorage.setItem("Storelink", link);
+      setStore(store);
+
+      localStorage.setItem("Storelink", publicLink);
       localStorage.setItem("storeId", store._id);
+
     } catch (err) {
       console.error("User has no store yet:", err.response?.data?.message);
       setTimeout(() => {
         setType("pending");
         setMessage("Create a store to get started!");
       }, 1000);
-      setMessage("")
+      setMessage("");
       setStoreLink(null);
-    }finally {
-    // Hide message after 4 seconds
-    setTimeout(() => setMessage(""), 4000);
-  }
+    } finally {
+      // Hide message after 4 seconds
+      setTimeout(() => setMessage(""), 4000);
+    }
   };
 
   fetchUserStore();
 }, []);
+
+
+//   useEffect(() => {
+//   const fetchUserStore = async () => {
+//     try {
+//      console.log("Fetching store for user:", user?.email);
+//       const token = localStorage.getItem("token");
+//       console.log("Using token:", token);
+//       const res = await API.get("/api/stores");
+//       console.log("Store fetch response:", res.data);
+//       const store = res.data.store;
+//       const link = `${window.location.origin}/stores/${store.storeLink}`;
+//       setStoreLink(link);
+//       console.log("Fetched store link:", storeLink);
+//       setStoreId(store._id);
+//       setStore(store)
+      
+//       localStorage.setItem("Storelink", link);
+//       localStorage.setItem("storeId", store._id);
+//     } catch (err) {
+//       console.error("User has no store yet:", err.response?.data?.message);
+//       setTimeout(() => {
+//         setType("pending");
+//         setMessage("Create a store to get started!");
+//       }, 1000);
+//       setMessage("")
+//       setStoreLink(null);
+//     }finally {
+   
+//     setTimeout(() => setMessage(""), 4000);
+//   }
+//   };
+
+//   fetchUserStore();
+// }, []);
 
 // useEffect(() => {
 //     const storedLink = localStorage.getItem("Storelink");

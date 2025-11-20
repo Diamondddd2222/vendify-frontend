@@ -29,6 +29,7 @@ const CreateStore = () => {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
   };
+  
 
 
 
@@ -99,7 +100,19 @@ useEffect(() => {
     const storeId = res.data.store.userId;
     console.log("Store created with ID:", storeId);
     const myData = res.data.store;
-    const publicLink = `${window.location.origin}/stores/${res.data.store.storeLink}`;
+    // const url = new URL(window.location.href);
+    // url.hostname = `www.${url.hostname.replace(/^www\./, '')}`;
+    // const publicLink = `${url.origin}/stores/${res.data.store.storeLink}`;
+    // console.log(publicLink);
+    const url = new URL(window.location.href);
+    // always force hostname to include www.
+    const hostname = `www.${url.hostname.replace(/^www\./, "")}`;
+    const publicLink = `${hostname}/stores/${res.data.store.storeLink}`;
+    localStorage.setItem("publicStoreLink", publicLink);
+    console.log(publicLink);
+
+
+    // const publicLink = `${window.location.origin}/stores/${res.data.store.storeLink}`;
     localStorage.setItem("store", JSON.stringify(myData));
     // localStorage.setItem('store', res.data.store)
     localStorage.setItem('Storelink', publicLink)
