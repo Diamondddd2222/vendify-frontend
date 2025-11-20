@@ -1,4 +1,4 @@
-.view-close{
+/* .view-close{
     display: flex;
     gap: 5px;
     align-items: center;
@@ -11,9 +11,9 @@
 
 .store-full-link{
     width: 180px;
-    white-space: nowrap;       /* keep on a single line */
-  overflow: hidden;          /* hide overflow */
-  text-overflow: ellipsis;   /* show "..." at the end */
+    white-space: nowrap;       
+  overflow: hidden;          
+  text-overflow: ellipsis;  
   display: inline-block; 
   font-weight: 400;
   color: black;
@@ -33,7 +33,81 @@
    text-decoration: none;
   cursor: pointer;
   position: relative;
-  z-index: 9999;   /* sits above everything */
+  z-index: 9999;   
   color: white;
   font-size: .7rem;
+} */
+
+/* Container for safety icon + link */
+.link-txt {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap; /* allow wrapping on small screens */
+  align-items: center;
+}
+
+/* Safety icon */
+.safety-icon-container {
+  flex-shrink: 0; /* don’t shrink icon */
+}
+
+/* Available link + eye icon */
+.view-close {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  flex-wrap: wrap; /* allow wrapping if needed */
+}
+
+/* Add status button/link */
+.view-status {
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 9999; 
+  color: white;
+  font-size: 0.7rem;
+  margin-right: 5px;
+  margin-top: 4px; /* spacing for small screens */
+}
+
+/* Store full link */
+.store-full-link {
+  width: 100%;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block; 
+  font-weight: 400;
+  color: black;
+}
+
+/* Responsive tweaks for screen < 400px */
+@media screen and (max-width: 400px) {
+  .link-txt {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .view-close {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .view-status {
+    font-size: 0.65rem;
+    margin-top: 2px;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .create-btn {
+    font-size: 0.7rem;
+    padding: 6px 14px;
+    min-width: 90px;
+    flex-direction: row;
+  }
 }
