@@ -25,7 +25,7 @@ const FalseDashboard = () => {
     
                 <div className="creating-store">
                  {/* <h3 className="create-store-text">Create Your Store </h3> */}
-                 <button onClick={navigateToCreatePage} className="create-btn">Create Store</button>
+                 <button onClick={navigateToCreatePage} className="create-btn-false">Create Store</button>
                 </div>
     </div>
   )
