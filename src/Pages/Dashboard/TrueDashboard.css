@@ -64,7 +64,7 @@
 /* Available link + eye icon */
 .view-close {
   display: flex;
-  gap: 3px;
+  gap: 6px;
   align-items: center;
   flex-wrap: wrap; /* allow wrapping if needed */
 }
