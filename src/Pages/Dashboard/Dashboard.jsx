@@ -268,7 +268,7 @@ useEffect(() => {
 
       {/* Stories Section */}
       <section className="stories-section">
-        <h2>Recent updates</h2>
+        <h2 className="recent-text">Recent updates</h2>
         <div className="stories-container">
   {stores.length > 0 ? (
     stores.map((store, index) => (
@@ -302,7 +302,7 @@ useEffect(() => {
 
       {/* Vendor Feed */}
       <section className="vendor-feed">
-        <h2>Vendors You May Know</h2>
+        <h2 className="vendors-texts">Vendors You May Know</h2>
         <div className="vendor-grid">
           {users.slice(0, 6).map((vendor, i) => (
             <div className="vendor-card" key={i}>

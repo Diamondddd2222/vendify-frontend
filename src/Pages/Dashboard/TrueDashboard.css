@@ -114,11 +114,19 @@
 
 
 @media screen and (max-width: 400px) {
-  .create-btn {
+  .create-btn-true {
     font-size: 0.7rem;
     padding: 6px 14px;
     min-width: 90px;
     flex-direction: row;
+  }
+
+  .create-btn-true::before {
+    border-radius: 5px;
+  }
+
+  .create-btn-true::after {
+    border-radius: 5px;
   }
 }
 
