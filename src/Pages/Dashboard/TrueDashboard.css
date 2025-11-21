@@ -1,42 +1,4 @@
-/* .view-close{
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
 
-.link-txt{
-  display: flex;
-  gap: 5px;
-}
-
-.store-full-link{
-    width: 180px;
-    white-space: nowrap;       
-  overflow: hidden;          
-  text-overflow: ellipsis;  
-  display: inline-block; 
-  font-weight: 400;
-  color: black;
-}
-
-.store-link{
-    text-decoration: none;
-     
-}
-
-.view-close{
-  display: flex;
-  gap: 3px;
-}
-
-.view-status{
-   text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 9999;   
-  color: white;
-  font-size: .7rem;
-} */
 
 /* Container for safety icon + link */
 .store-link-true{
@@ -91,6 +53,8 @@
   display: inline-block; 
   font-weight: 400;
   color: black;
+  background-color: transparent;
+  border: none;
 }
 
 /* Responsive tweaks for screen < 400px */

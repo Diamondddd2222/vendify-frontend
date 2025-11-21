@@ -25,20 +25,7 @@ const Dashboard = () => {
   console.log("User data in Dashboard:", user)
   
 
-//  useEffect(() => {
-//   const fetchStores = async () => {
-//     try {
-//       const res = await API.get("/api/stores/reqstores"); // 👈 your getStores endpoint
-//       const fetchedStores = res.data.allStores;
-//       setStores(fetchedStores);
-//       console.log("Fetched stores:", res.data.allStores);
-//       console.log('stores', stores)
-//     } catch (err) {
-//       console.error("Failed to load stores", err);
-//     }
-//   };
-//   fetchStores();
-// }, []);
+
 
 useEffect(() => {
   const fetchStores = async () => {
@@ -117,87 +104,10 @@ useEffect(() => {
 }, []);
 
 
-//   useEffect(() => {
-//   const fetchUserStore = async () => {
-//     try {
-//      console.log("Fetching store for user:", user?.email);
-//       const token = localStorage.getItem("token");
-//       console.log("Using token:", token);
-//       const res = await API.get("/api/stores");
-//       console.log("Store fetch response:", res.data);
-//       const store = res.data.store;
-//       const link = `${window.location.origin}/stores/${store.storeLink}`;
-//       setStoreLink(link);
-//       console.log("Fetched store link:", storeLink);
-//       setStoreId(store._id);
-//       setStore(store)
-      
-//       localStorage.setItem("Storelink", link);
-//       localStorage.setItem("storeId", store._id);
-//     } catch (err) {
-//       console.error("User has no store yet:", err.response?.data?.message);
-//       setTimeout(() => {
-//         setType("pending");
-//         setMessage("Create a store to get started!");
-//       }, 1000);
-//       setMessage("")
-//       setStoreLink(null);
-//     }finally {
-   
-//     setTimeout(() => setMessage(""), 4000);
-//   }
-//   };
 
-//   fetchUserStore();
-// }, []);
-
-// useEffect(() => {
-//     const storedLink = localStorage.getItem("Storelink");
-//     const storedId = localStorage.getItem("storeId");
-//     if (storedLink && storedId) {
-//         setStoreLink(storedLink);
-//         setStoreId(storedId);
-//         console.log("Loaded store link from localStorage:", storedLink);
-//     }else{
-//         setStoreLink("");
-//         setStoreId("");
-
-//     }
-// }, [ storeId]);
-
-
-//   useEffect(() => {
-//     if (user?._Id) {
-//       setStoreBrand(user.brandName);
-//       const link = `${window.location.origin}/stores/${user.storeBrand}`;
-//       setStoreLink(link);
-//       localStorage.setItem("Storelink", link);
-//     } else {
-//       setStoreLink(null);
-//     }
-//      }, []);
-//     if 
-//    const storeLink= localStorage.getItem("Storelink");
-//     setStoreLink(storeLink)
-//     console.log(storeLink);
+ 
  
 
-  // Load store link from localStorage
-//   useEffect(() => {
-    
-//     const savedLink = localStorage.getItem("Storelink");
-//     const storedId = localStorage.getItem("storeId");
-//     console.log("Retrieved store link from localStorage:", savedLink);
-//     if (savedLink && storeId) {
-//       setStoreLink(savedLink);
-//       setStoreId(storedId);
-      
-//     }
-//   }, []);
-
-    // const navigateToCreatePage = () => {
-    //     navigate("/CreateStore");
-    // };
 
   return (
     <><div className="dashboard-container">
@@ -227,43 +137,8 @@ useEffect(() => {
       {/* Create Store */}
       <section className="create-store-section">
         {storeLink ? <TrueDashboard storeLink={storeLink} storeId={storeId} /> : <FalseDashboard />}
-        {/* <div className="create-store-card">
-        <div className="your-store-link-sec">
-            <div className="link-txt">
-                <div className="safety-icon-container">
-                    <AiFillSafetyCertificate className="safety-icon"/>
-                </div>
-               
-               <Link className="store-link">Your Store Link</Link>
-            </div>
-            <Link className="view-store">View Store</Link>
-        </div>
-           
-
-        <div className="creating-store">
-         <h3 className="create-store-text">Create Your Store</h3>
-         <button onClick={navigateToCreatePage} className="create-btn">Create Store</button>
-        </div>
-    </div> */}
-
-
       </section>
 
-      {/* <div className="create-store-card">
-          <div className="store-first">
-             <p className="store-link">Your store link</p>
-              <h3>Create Your Store</h3>
-          </div>
-        
-        <div className="store-second">
-         <p className="view-store-link">
-              View Store
-            
-          </p>
-          <button className="create-btn">Create Store</button>
-        </div>
-          
-      </div> */}
 
       {/* Stories Section */}
       <section className="stories-section">
