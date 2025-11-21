@@ -376,6 +376,11 @@
 
 
 /* FEED */
+.vendor-feed{
+  margin-bottom: 70px;
+}
+
+
 .vendor-feed h2 {
      position: relative; 
   font-size: 1.2rem;

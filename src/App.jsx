@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
 import CreateStore from './Pages/CreateStore/CreateStore.jsx'
 import StatusPage from './Pages/StatusPage/statusPage.jsx'
+import BottomNav from './components/BottomNav.jsx'
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
           <Route path='/CreateStore' element={<CreateStore/>}/>
           <Route path='/Status' element={<StatusPage/>}/>
         </Routes>
+       
+        
+
       </BrowserRouter>
     </>
   )

@@ -9,6 +9,7 @@ import FalseDashboard from "./FalseDashboard.jsx";
 import MessageBar from "../../components/MessageBar.jsx";
 import "./Dashboard.css";
 import Loader from "../../components/Loader.jsx";
+import BottomNav from "../../components/BottomNav.jsx";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -199,106 +200,103 @@ useEffect(() => {
     // };
 
   return (
-    <div className="dashboard-container">
+    <><div className="dashboard-container">
       <MessageBar type={type} message={message} />
-        <video className="bg-video-auth" autoPlay loop muted playsInline>
-                <source src={bgVideo} type="video/mp4" />
-              </video>
-              <div className="overlay-auth-dashboard"></div>
+      <video className="bg-video-auth" autoPlay loop muted playsInline>
+        <source src={bgVideo} type="video/mp4" />
+      </video>
+      <div className="overlay-auth-dashboard"></div>
       {/* Header */}
       <header className="dashboard-header">
         <div className="h-section">
-           <h1 className="text-brand">
-             Hey, <span className="highlight">{user?.name || "Vendor"}</span> 
-           </h1>
-           <div className="h-icons">
-            
-              <FaRegBell className="notification-bell" />
-              <SlEarphonesAlt className="customer-support"/>
-           </div>
-           
+          <h1 className="text-brand">
+            Hey, <span className="highlight">{user?.name || "Vendor"}</span>
+          </h1>
+          <div className="h-icons">
+
+            <FaRegBell className="notification-bell" />
+            <SlEarphonesAlt className="customer-support" />
+          </div>
+
         </div>
-       
+
         {/* <h1 className="welcome-text">Welcome, <span className="highlight">{user?.name || "Vendor"}</span> 👋</h1> */}
         <p>Grow your store and connect with vendors on <span className="highlight-p">Vendify</span></p>
       </header>
 
       {/* Create Store */}
       <section className="create-store-section">
-        {
-           storeLink ?  <TrueDashboard storeLink={storeLink} storeId={storeId}/>: <FalseDashboard/>  
-        }
+        {storeLink ? <TrueDashboard storeLink={storeLink} storeId={storeId} /> : <FalseDashboard />}
         {/* <div className="create-store-card">
-            <div className="your-store-link-sec">
-                <div className="link-txt">
-                    <div className="safety-icon-container">
-                        <AiFillSafetyCertificate className="safety-icon"/>
-                    </div>
-                   
-                   <Link className="store-link">Your Store Link</Link>
+        <div className="your-store-link-sec">
+            <div className="link-txt">
+                <div className="safety-icon-container">
+                    <AiFillSafetyCertificate className="safety-icon"/>
                 </div>
-                <Link className="view-store">View Store</Link>
-            </div>
                
-
-            <div className="creating-store">
-             <h3 className="create-store-text">Create Your Store</h3>
-             <button onClick={navigateToCreatePage} className="create-btn">Create Store</button>
+               <Link className="store-link">Your Store Link</Link>
             </div>
-        </div> */}
+            <Link className="view-store">View Store</Link>
+        </div>
+           
 
-        
+        <div className="creating-store">
+         <h3 className="create-store-text">Create Your Store</h3>
+         <button onClick={navigateToCreatePage} className="create-btn">Create Store</button>
+        </div>
+    </div> */}
+
+
       </section>
 
-      {/* <div className="create-store-card"> 
-            <div className="store-first">
-               <p className="store-link">Your store link</p>
-                <h3>Create Your Store</h3>  
-            </div>
-          
-          <div className="store-second">
-           <p className="view-store-link">
-                View Store
-              
-            </p>
-            <button className="create-btn">Create Store</button>
+      {/* <div className="create-store-card">
+          <div className="store-first">
+             <p className="store-link">Your store link</p>
+              <h3>Create Your Store</h3>
           </div>
+        
+        <div className="store-second">
+         <p className="view-store-link">
+              View Store
             
-        </div> */}
+          </p>
+          <button className="create-btn">Create Store</button>
+        </div>
+          
+      </div> */}
 
       {/* Stories Section */}
       <section className="stories-section">
         <h2 className="recent-text">Recent updates</h2>
         <div className="stories-container">
-  {stores.length > 0 ? (
-    stores.map((store, index) => (
-      <div className="story" key={index}>
-        <div className="story-ring">
-          <div className="story-inner">
-            {store.logoUrl ? (
-              <img
-                src={store.logoUrl}
-                alt={store.name}
-                className="story-logo"
-              />
-            ) : (
-              <span className="story-text">
-                {store.name.charAt(0).toUpperCase()}
-              </span>
-            )}
-          </div>
+          {stores.length > 0 ? (
+            stores.map((store, index) => (
+              <div className="story" key={index}>
+                <div className="story-ring">
+                  <div className="story-inner">
+                    {store.logoUrl ? (
+                      <img
+                        src={store.logoUrl}
+                        alt={store.name}
+                        className="story-logo" />
+                    ) : (
+                      <span className="story-text">
+                        {store.name.charAt(0).toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <p className="story-name">{store.name.split(" ")[0]}</p>
+              </div>
+            ))
+          ) : (
+            <p className="loading-text"><Loader /></p>
+          )}
         </div>
-        <p className="story-name">{store.name.split(" ")[0]}</p>
-      </div>
-    ))
-  ) : (
-    <p className="loading-text"><Loader/></p>
-  )}
-</div>
 
       </section>
 
-    
+
 
       {/* Vendor Feed */}
       <section className="vendor-feed">
@@ -313,7 +311,7 @@ useEffect(() => {
           ))}
         </div>
       </section>
-    </div>
+    </div><BottomNav /></>
   );
 };
 
