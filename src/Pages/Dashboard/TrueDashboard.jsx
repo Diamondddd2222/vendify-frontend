@@ -46,7 +46,7 @@ const TrueDashboard = ({ storeLink,storeId }) => {
 
                        <div className="view-close">
                          <Link className="store-link-true">Available Link</Link>
-                         <LuEyeClosed width={5} />
+                         <LuEyeClosed className='open-icon'  />
                        </div>    
                     </div>
                     <Link  className="view-status" to='/Status'>Add status</Link>

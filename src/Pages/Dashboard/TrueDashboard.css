@@ -193,3 +193,8 @@
     width: 100%;
     padding: 8px 10px
 }
+
+.open-icon{
+  font-size: .85rem;
+  margin-left: 3px;
+}
