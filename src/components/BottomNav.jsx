@@ -13,7 +13,7 @@ export default function BottomNav() {
 
       <Link to="/cart" className="nav-item">
         <FaShoppingCart className="icon-footer" />
-        <span>Cart</span>
+        <span>Vendors</span>
       </Link>
 
       <Link to="/messages" className="nav-item">
