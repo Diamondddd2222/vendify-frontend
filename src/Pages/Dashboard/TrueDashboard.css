@@ -55,6 +55,7 @@
   color: black;
   background-color: transparent;
   border: none;
+  font-size: .9rem;
 }
 
 /* Responsive tweaks for screen < 400px */
