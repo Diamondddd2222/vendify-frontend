@@ -9,7 +9,7 @@ import Login from './Pages/Login/Login.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
 import CreateStore from './Pages/CreateStore/CreateStore.jsx'
 import StatusPage from './Pages/StatusPage/statusPage.jsx'
-import BottomNav from './components/BottomNav.jsx'
+import AddCaption from './Pages/AddCaption/AddCaption.jsx'
 
 
 function App() {
@@ -26,10 +26,8 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/CreateStore' element={<CreateStore/>}/>
           <Route path='/Status' element={<StatusPage/>}/>
+          <Route path='/add-caption' element={<AddCaption/>}/>
         </Routes>
-       
-        
-
       </BrowserRouter>
     </>
   )

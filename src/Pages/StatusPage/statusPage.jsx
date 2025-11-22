@@ -2,6 +2,7 @@ import React from "react";
 import "./statusPage.css";
 import { Plus, Camera, Image as ImageIcon, MoreVertical } from "lucide-react";
 import BottomNav from "../../components/BottomNav";
+import API from "../../utils/api";
 
 const StatusPage =() =>{
   const sampleStatuses = [
@@ -25,6 +26,26 @@ const StatusPage =() =>{
     },
   ];
 
+  const handleFileChange = async (e) => {
+  const file = e.target.files[0];
+
+  const form = new FormData();
+  form.append("media", file);   // 👈 This word must match backend
+
+  await API.post("/api/status/upload", form, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
+
+  // Backend returns URL of uploaded media
+  const mediaUrl = res.data.mediaUrl;
+
+  // Navigate to caption page with media url
+  navigate("/add-caption", {
+    state: { mediaUrl } // pass to next page
+  });
+};
+
+
   return (
     <>
     <div className="status-page">
@@ -42,9 +63,22 @@ const StatusPage =() =>{
             alt="Your Logo"
             className="my-status-img"
           />
-          <div className="add-status-btn">
+          {/* <div className="add-status-btn">
             <Plus size={14} />
-          </div>
+          </div> */}
+          <label htmlFor="statusUpload" className="add-status-btn">
+            <Plus size={14} />
+          </label>
+
+          <input
+           type="file"
+           name="media" 
+           id="statusUpload"
+           accept="image/*,video/*"
+           style={{ display: "none" }}
+           onChange={(e) => handleFileChange(e)}
+          />
+
         </div>
         <div className="flex-status-bar">
           <div className="add-status-updates">
@@ -52,9 +86,19 @@ const StatusPage =() =>{
             <p className="my-store-sub">Tap to add product status</p>
           </div>
           <div className="status-btn-row">
-            <button className="camera-btn">
-              <Camera size={14} /> 
-            </button>
+            
+            <label htmlFor="statusUpload" className="camera-btn">
+             <Camera size={14} />
+            </label>
+
+          <input
+           type="file"
+           name="media" 
+           id="statusUpload"
+           accept="image/*,video/*"
+           style={{ display: "none" }}
+           onChange={(e) => handleFileChange(e)}
+          />
           </div>    
         </div>
       </div>
