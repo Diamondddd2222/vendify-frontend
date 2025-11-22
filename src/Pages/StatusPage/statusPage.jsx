@@ -44,21 +44,21 @@ const StatusPage =() =>{
             <Plus size={14} />
           </div>
         </div>
-        <div>
-          <h2 className="my-store-title">My Store</h2>
-          <p className="my-store-sub">Tap to add product status</p>
+        <div className="flex-status-bar">
+          <div className="add-status-updates">
+            <h2 className="my-store-title">My Store</h2>
+            <p className="my-store-sub">Tap to add product status</p>
+          </div>
+          <div className="status-btn-row">
+            <button className="camera-btn">
+              <Camera size={18} /> 
+            </button>
+          </div>    
         </div>
       </div>
 
       {/* Buttons */}
-      <div className="status-btn-row">
-        <button className="camera-btn">
-          <Camera size={18} /> Camera
-        </button>
-        <button className="gallery-btn">
-          <ImageIcon size={18} /> Gallery
-        </button>
-      </div>
+      
 
       {/* Recent Updates */}
       <h3 className="recent-title">Recent Updates</h3>
