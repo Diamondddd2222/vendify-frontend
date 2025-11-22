@@ -1,6 +1,7 @@
 import React from "react";
 import "./statusPage.css";
 import { Plus, Camera, Image as ImageIcon, MoreVertical } from "lucide-react";
+import BottomNav from "../../components/BottomNav";
 
 const StatusPage =() =>{
   const sampleStatuses = [
@@ -25,6 +26,7 @@ const StatusPage =() =>{
   ];
 
   return (
+    <>
     <div className="status-page">
       {/* Header */}
       <div className="status-header">
@@ -79,6 +81,8 @@ const StatusPage =() =>{
         ))}
       </div>
     </div>
+    <BottomNav />
+    </>
   );
 }
 
