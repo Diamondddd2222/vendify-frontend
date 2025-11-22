@@ -29,7 +29,7 @@ const StatusPage =() =>{
       {/* Header */}
       <div className="status-header">
         <h1>Status</h1>
-        <MoreVertical className="icon" />
+        <MoreVertical className="icon-vertical" />
       </div>
 
       {/* Add Status Section */}
