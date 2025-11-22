@@ -41,6 +41,7 @@
   height: 60px ;
   border-radius: 50%;
   position: relative;
+  border: 3px solid #686767;
 }
 
 .add-status-updates{
@@ -52,7 +53,7 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #444;
+  border: 2px solid #686767;
 }
 
 .add-status-btn {
