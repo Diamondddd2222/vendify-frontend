@@ -51,7 +51,7 @@ const StatusPage =() =>{
           </div>
           <div className="status-btn-row">
             <button className="camera-btn">
-              <Camera size={18} /> 
+              <Camera size={14} /> 
             </button>
           </div>    
         </div>
