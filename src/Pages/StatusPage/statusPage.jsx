@@ -48,10 +48,11 @@ const handleFileChange = async (e) => {
 
     // Extract returned Cloudinary URL
     const mediaUrl = res.data.mediaUrl;
+    const mediaType = res.data.mediaType
 
     // Navigate to caption page
     navigate("/add-caption", {
-      state: { mediaUrl },
+      state: { mediaUrl, mediaType },
     });
   } catch (error) {
     console.error("Upload failed:", error);

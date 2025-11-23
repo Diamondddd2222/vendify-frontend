@@ -8,11 +8,13 @@ export default function AddCaption() {
   const navigate = useNavigate();
   
   const mediaUrl = state?.mediaUrl;
+  const mediaType = state?.mediaType
   const [caption, setCaption] = useState("");
 
   const submitStatus = async () => {
     await API.post("/api/status/create", {
       mediaUrl,
+      mediaType,
       caption
     });
 
