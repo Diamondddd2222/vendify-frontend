@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./AddCaption.css";
+import API from "../../utils/api";
 
 export default function AddCaption() {
   const { state } = useLocation();

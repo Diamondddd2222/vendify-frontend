@@ -3,8 +3,10 @@ import "./statusPage.css";
 import { Plus, Camera, Image as ImageIcon, MoreVertical } from "lucide-react";
 import BottomNav from "../../components/BottomNav";
 import API from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const StatusPage =() =>{
+  const navigate = useNavigate()
   const sampleStatuses = [
     {
       id: 1,
@@ -26,24 +28,36 @@ const StatusPage =() =>{
     },
   ];
 
-  const handleFileChange = async (e) => {
-  const file = e.target.files[0];
+const handleFileChange = async (e) => {
+  try {
+    const file = e.target.files[0];
+    if (!file) return;
 
-  const form = new FormData();
-  form.append("media", file);   // 👈 This word must match backend
+    const form = new FormData();
+    form.append("media", file); // MUST match backend field name
+    console.log("sending file:", file);
 
-  await API.post("/api/status/upload", form, {
-    headers: { "Content-Type": "multipart/form-data" }
-  });
+    // 🚀 Send to backend
+    const res = await API.post("/api/status/upload", form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-  // Backend returns URL of uploaded media
-  const mediaUrl = res.data.mediaUrl;
+    console.log("Upload response:", res.data);
 
-  // Navigate to caption page with media url
-  navigate("/add-caption", {
-    state: { mediaUrl } // pass to next page
-  });
+    // Extract returned Cloudinary URL
+    const mediaUrl = res.data.mediaUrl;
+
+    // Navigate to caption page
+    navigate("/add-caption", {
+      state: { mediaUrl },
+    });
+  } catch (error) {
+    console.error("Upload failed:", error);
+  }
 };
+
 
 
   return (
