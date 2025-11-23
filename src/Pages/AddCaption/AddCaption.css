@@ -1,4 +1,4 @@
-.caption-page {
+/* .caption-page {
   padding: 20px;
   text-align: center;
   color: white;
@@ -47,4 +47,88 @@
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+} */
+.caption-container {
+  height: 100vh;
+  width: 100%;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* .media-preview {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.media-preview img,
+.media-preview video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+} */
+
+.media-preview {
+  width: 100%;
+  height: 88vh; /* fills almost full screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.media-preview img,
+.media-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* fills the screen without distortion */
+  object-position: center; /* always center the media */
+}
+
+
+.caption-bar {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(6px);
+}
+
+.caption-input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.842);
+  border: 1px solid rgba(136, 135, 135, 0.993);
+  color: white;
+  outline: none;
+  font-size: 16px;
+}
+
+.caption-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.send-btn {
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+  background: #e2df07;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
