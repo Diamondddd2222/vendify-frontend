@@ -48,7 +48,7 @@ const handleFileChange = async (e) => {
 
     // Extract returned Cloudinary URL
     const mediaUrl = res.data.mediaUrl;
-    const mediaType = res.data.mediaType
+    const mediaType = file.type.startsWith("video") ? "video" : "image";
 
     // Navigate to caption page
     navigate("/add-caption", {
