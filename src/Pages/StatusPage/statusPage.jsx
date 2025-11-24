@@ -1,40 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./statusPage.css";
-import { Plus, Camera, Image as ImageIcon, MoreVertical } from "lucide-react";
+import { Plus, Camera, MoreVertical } from "lucide-react";
 import BottomNav from "../../components/BottomNav";
 import API from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
-const StatusPage =() =>{
-  const navigate = useNavigate()
-  const sampleStatuses = [
-    {
-      id: 1,
-      storeName: "FashionHub",
-      logo: "https://via.placeholder.com/60",
-      time: "Today, 8:30 AM",
-    },
-    {
-      id: 2,
-      storeName: "TechZone",
-      logo: "https://via.placeholder.com/60",
-      time: "Yesterday, 4:22 PM",
-    },
-    {
-      id: 3,
-      storeName: "BeautyWave",
-      logo: "https://via.placeholder.com/60",
-      time: "Yesterday, 9:10 AM",
-    },
-  ];
 
-const handleFileChange = async (e) => {
+
+
+const StatusPage = () => {
+  const navigate = useNavigate();
+  const [statuses, setStatuses] = useState([]);
+  const [myStatuses, setMyStatuses] = useState([]);
+  
+
+  // Fetch all statuses on mount
+  useEffect(() => {
+    const fetchStatuses = async () => {
+      try {
+        const res = await API.get("/api/status/all"); // Make sure backend endpoint returns all statuses
+        const allStatuses = res.data.statuses || [];
+        console.log("All Status", allStatuses)
+        const token = localStorage.getItem("token");
+        let myId = null;
+
+        if (token) {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        console.log(payload)
+        myId = payload.id;
+        console.log("Current user ID:", myId);
+        }
+
+        // Split my statuses vs others
+        setMyStatuses(allStatuses.filter((s) => s._id === myId));
+        setStatuses(allStatuses.filter((s) => s._id !== myId));
+      } catch (error) {
+        console.error("Failed to fetch statuses:", error);
+      }
+    };
+
+    fetchStatuses();
+  }, []);
+
+  const handleFileChange = async (e) => {
   try {
     const file = e.target.files[0];
     if (!file) return;
 
     const form = new FormData();
-    form.append("media", file); // MUST match backend field name
+    form.append("media", file); 
     console.log("sending file:", file);
 
     // 🚀 Send to backend
@@ -49,7 +63,7 @@ const handleFileChange = async (e) => {
     // Extract returned Cloudinary URL
     const mediaUrl = res.data.mediaUrl;
     const mediaType = file.type.startsWith("video") ? "video" : "image";
-
+    
     // Navigate to caption page
     navigate("/add-caption", {
       state: { mediaUrl, mediaType },
@@ -61,88 +75,88 @@ const handleFileChange = async (e) => {
 
 
 
+
   return (
     <>
-    <div className="status-page">
-      {/* Header */}
-      <div className="status-header">
-        <h1>Status</h1>
-        <MoreVertical className="icon-vertical" />
-      </div>
-
-      {/* Add Status Section */}
-      <div className="my-status-section">
-        <div className="my-status-avatar">
-          <img
-            src="https://via.placeholder.com/80"
-            alt="Your Logo"
-            className="my-status-img"
-          />
-          {/* <div className="add-status-btn">
-            <Plus size={14} />
-          </div> */}
-          <label htmlFor="statusUpload" className="add-status-btn">
-            <Plus size={14} />
-          </label>
-
-          <input
-           type="file"
-           name="media" 
-           id="statusUpload"
-           accept="image/*,video/*"
-           style={{ display: "none" }}
-           onChange={(e) => handleFileChange(e)}
-          />
-
+      <div className="status-page">
+        <div className="status-header">
+          <h1>Status</h1>
+          <MoreVertical className="icon-vertical" />
         </div>
-        <div className="flex-status-bar">
-          <div className="add-status-updates">
-            <h2 className="my-store-title">My Store</h2>
-            <p className="my-store-sub">Tap to add product status</p>
-          </div>
-          <div className="status-btn-row">
-            
-            <label htmlFor="statusUpload" className="camera-btn">
-             <Camera size={14} />
-            </label>
 
-          <input
-           type="file"
-           name="media" 
-           id="statusUpload"
-           accept="image/*,video/*"
-           style={{ display: "none" }}
-           onChange={(e) => handleFileChange(e)}
-          />
-          </div>    
-        </div>
-      </div>
-
-      {/* Buttons */}
-      
-
-      {/* Recent Updates */}
-      <h3 className="recent-title">Recent Updates</h3>
-
-      <div className="recent-list">
-        {sampleStatuses.map((status) => (
-          <div key={status.id} className="recent-item">
+        {/* My Status */}
+        <div className="my-status-section">
+          <div className="my-status-avatar" onClick={() => navigate("/status-viewer", { state: { statuses: myStatuses } })}>
             <div className="status-ring">
               <div className="status-ring-inner">
-                <img src={status.logo} alt={status.storeName} />
+                {/* Show last uploaded media thumbnail */}
+                {myStatuses.length > 0 ? (
+                  <img src={myStatuses[myStatuses.length - 1].mediaUrl} alt="My Status" />
+                ) : (
+                  <img src="https://via.placeholder.com/80" alt="Your Logo" />
+                )}
               </div>
             </div>
-            <div>
-              <h4 className="recent-name">{status.storeName}</h4>
-              <p className="recent-time">{status.time}</p>
+
+            <label htmlFor="statusUpload" className="add-status-btn">
+              <Plus size={14} />
+            </label>
+            <input
+              type="file"
+              name="media"
+              id="statusUpload"
+              accept="image/*,video/*"
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
+          </div>
+
+          <div className="flex-status-bar">
+            <div className="add-status-updates">
+              <h2 className="my-store-title">My Store</h2>
+              <p className="my-store-sub">Tap to add product status</p>
+            </div>
+            <div className="status-btn-row">
+              <label htmlFor="statusUpload" className="camera-btn">
+                <Camera size={14} />
+              </label>
+              <input
+                type="file"
+                name="media"
+                id="statusUpload"
+                accept="image/*,video/*"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
             </div>
           </div>
-        ))}
+        </div>
+
+        {/* Other Statuses */}
+        <h3 className="recent-title">Recent Updates</h3>
+        <div className="recent-list">
+          {statuses.map((status) => (
+            <div
+              key={status._id}
+              className="recent-item"
+              onClick={() => navigate("/status-viewer", { state: { statuses: [status] } })}
+            >
+              <div className="status-ring">
+                <div className="status-ring-inner">
+                  <img src={status.logo} alt={status.storeName} />
+                </div>
+              </div>
+              <div>
+                <h4 className="recent-name">{status.storeName}</h4>
+                <p className="recent-time">{new Date(status.createdAt).toLocaleString()}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-    <BottomNav />
+      <BottomNav />
     </>
   );
-}
+};
 
-export default StatusPage
+export default StatusPage;
