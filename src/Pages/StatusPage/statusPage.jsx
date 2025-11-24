@@ -29,7 +29,7 @@ const StatusPage = () => {
       try {
         const res = await API.get("/api/status/all");
         const allStatuses = res.data.statuses || [];
-
+    console.log("All Status", allStatuses)
         // decode user ID
         const id = decodeToken();
         setMyId(id);
@@ -159,11 +159,11 @@ const StatusPage = () => {
             >
               <div className="status-ring">
                 <div className="status-ring-inner">
-                  <img src={status.userId.logo} alt={status.userId.storeName} />
+                  <img src={status.mediaUrl} alt={status.userId.brandName} />
                 </div>
               </div>
-              <div>
-                <h4 className="recent-name">{status.userId.storeName}</h4>
+              <div className="sv-meta">
+                <h4 className="recent-name">{status.userId.brandName}</h4>
                 <p className="recent-time">
                   {new Date(status.createdAt).toLocaleString()}
                 </p>

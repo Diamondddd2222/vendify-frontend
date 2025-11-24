@@ -56,6 +56,12 @@
  
 }
 
+.sv-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4rem;
+}
+
 .add-status-btn {
   position: absolute;
   bottom: 0;

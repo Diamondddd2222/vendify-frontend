@@ -15,7 +15,7 @@ export default function StatusViewer() {
     mediaUrl: s.mediaUrl || "",
     mediaType: s.mediaType || (s.mediaUrl?.includes(".mp4") ? "video" : "image"),
     caption: s.caption || "",
-    brandName: s.brandName || s.userId?.storeName || "Vendify",
+    brandName: s.brandName || s.userId?.brandName || "Vendify",
     logo: s.userId?.logo || "",
     createdAt: s.createdAt || null,
   }));
@@ -168,7 +168,7 @@ const touchStartY = useRef(0)
             {current.createdAt && <div className="sv-time">{new Date(current.createdAt).toLocaleString()}</div>}
           </div>
         </div>
-        <button className="sv-close" onClick={()=>navigate(-1)}>✕</button>
+        <button className="sv-close" onClick={()=>navigate('/Status')}>✕</button>
       </div>
 
       {/* Progress bars */}
