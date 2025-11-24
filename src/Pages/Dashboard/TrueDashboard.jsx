@@ -7,7 +7,7 @@ import "./TrueDashboard.css";
 
 const TrueDashboard = ({ storeLink, storeId }) => {
     if (!storeLink && storeId) return null;
-   const [showLink, setShowLink] = useState(false);
+   const [showLink, setShowLink] = useState(true);
    const navigate = useNavigate();
 
  const toggleView = () => {
