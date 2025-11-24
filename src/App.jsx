@@ -10,7 +10,7 @@ import Dashboard from './Pages/Dashboard/Dashboard.jsx'
 import CreateStore from './Pages/CreateStore/CreateStore.jsx'
 import StatusPage from './Pages/StatusPage/statusPage.jsx'
 import AddCaption from './Pages/AddCaption/AddCaption.jsx'
-
+import StatusViewer from './Pages/StatusViewer/StatusViewer.jsx'
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path='/CreateStore' element={<CreateStore/>}/>
           <Route path='/Status' element={<StatusPage/>}/>
           <Route path='/add-caption' element={<AddCaption/>}/>
+          <Route path="/status-viewer" element={<StatusViewer />} />
         </Routes>
       </BrowserRouter>
     </>
