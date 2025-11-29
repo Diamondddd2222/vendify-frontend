@@ -92,6 +92,7 @@
      position: relative; 
   margin-bottom: 40px;
   margin-top: 30px;
+   overflow-x: hidden;
   z-index: 3;
 }
 .stories-section h2 {
@@ -101,7 +102,8 @@
 }
 .stories-container {
   display: flex;
-  overflow-x: auto;
+   overflow-x: hidden;
+  /* overflow-x: auto; */
   gap: 20px;
   padding-bottom: 10px;
   scrollbar-width: none;
