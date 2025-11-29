@@ -7,6 +7,10 @@
     align-items: flex-start;
 }
 
+.welcome-text{
+    font-family:rubik; 
+}
+
 .logo {
     max-width: 150px;
     height: 150px;

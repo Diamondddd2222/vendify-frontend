@@ -82,6 +82,10 @@ const StatusPage = () => {
     }
   };
 
+  const handleAnotherUpload =() => {
+    document.getElementById("statusUpload").click();
+  }
+
   return (
     <>
       <div className="status-page">
@@ -130,7 +134,7 @@ const StatusPage = () => {
               <p className="my-store-sub">Tap to add product status</p>
             </div>
 
-            <div className="status-btn-row">
+            <div className="status-btn-row" onClick={handleAnotherUpload}>
               <label htmlFor="statusUpload" className="camera-btn vendify-color">
                 <Camera size={14} />
               </label>

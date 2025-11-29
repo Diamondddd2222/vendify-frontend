@@ -56,7 +56,7 @@ const Home = () => {
         {/* 🦸‍♂️ Hero Section */}
         <section className="hero-section">
           <div className="hero-content">
-            <h1>Welcome to Vendify</h1>
+            <h1 className='welcome-text'>Welcome to Vendify</h1>
             <p>Your one-stop platform for smarter selling.</p>
             <button className="hero-btn" onClick={navigateToSignUp}>Get Started</button>
           </div>
