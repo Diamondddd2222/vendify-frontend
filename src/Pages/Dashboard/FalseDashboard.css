@@ -2,7 +2,7 @@
 
 .create-store-card {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 0px;
   padding: 5px;
 }
 
@@ -48,7 +48,7 @@
   background: #020100;
   color: #e2df07;
   padding: 6px 16px;
-  border-radius: 5px;
+  border-radius: 2px;
   font-weight: 400;
   border: none;
   width: 100%;

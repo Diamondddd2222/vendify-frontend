@@ -88,11 +88,11 @@
   }
 
   .create-btn-true::before {
-    border-radius: 5px;
+    border-radius: 3px;
   }
 
   .create-btn-true::after {
-    border-radius: 5px;
+    border-radius: 3px;
   }
 }
 
@@ -102,7 +102,7 @@
   color: #e2df07;
   border: none;
   padding: 5px 16px;
-  border-radius: 5px;
+  border-radius: 3px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s;
@@ -120,7 +120,7 @@
   bottom: -2px;
   background: linear-gradient(120deg, #e2df07, #000, #e2df07, #000);
   background-size: 300% 300%;
-  border-radius: 5px;
+  border-radius: 0px;
   z-index: -1;
   animation: borderMove 6s linear infinite;
 }
@@ -134,7 +134,7 @@
   right: 2px;
   bottom: 2px;
   background: #020100;
-  border-radius: 5px;
+  border-radius: 0px;
   z-index: -1;
 }
 
