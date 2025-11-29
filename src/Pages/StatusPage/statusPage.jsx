@@ -134,9 +134,9 @@ const StatusPage = () => {
               <p className="my-store-sub">Tap to add product status</p>
             </div>
 
-            <div className="status-btn-row" onClick={handleAnotherUpload}>
+            <div className="status-btn-row" >
               <label htmlFor="statusUpload" className="camera-btn vendify-color">
-                <Camera size={14} />
+                <Camera size={14} onClick={handleAnotherUpload} />
               </label>
               <input
                 type="file"
