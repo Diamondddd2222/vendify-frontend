@@ -2,9 +2,12 @@
 
 .create-store-card {
   width: 100%;
-  border-radius: 0px;
+  max-width: 100%;
   padding: 5px;
+  border-radius: 0px;
+  overflow-x: hidden;
 }
+
 
 /* Top Section: link + view store */
 /* .your-store-link-sec {
