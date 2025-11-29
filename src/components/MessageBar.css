@@ -24,6 +24,7 @@
   border-left: 5px solid #02ca4b; /* green */
   /* background-color: #2cc564bb; */
    background-color: #000000bb;
+   color: #02ca4b;
 }
 
 .message-bar.error {
@@ -36,6 +37,7 @@
   border-left: 5px solid #f59e0b; /* yellow */
   /* background-color: #f5c542bb; */
   background-color: #000000bb;
+  color: #f59e0b;
 }
 
 @keyframes slideDown {
