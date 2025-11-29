@@ -135,13 +135,13 @@ const StatusPage = () => {
             </div>
 
             <div className="status-btn-row" >
-              <label htmlFor="statusUpload" className="camera-btn vendify-color">
-                <Camera size={14} onClick={handleAnotherUpload} />
+              <label htmlFor="cameraUpload" className="camera-btn vendify-color">
+                <Camera size={14} />
               </label>
               <input
                 type="file"
                 name="media"
-                id="statusUpload"
+                id="cameraUpload"
                 accept="image/*,video/*"
                 style={{ display: "none" }}
                 onChange={handleFileChange}
