@@ -202,14 +202,17 @@
   width: 100%;
   background-color: #f3db06ce;
 
-  
+  /* RESERVE SPACE IMMEDIATELY */
+  min-height: 100px; /* adjust to roughly your dashboard card height */
   animation: slideInLeft 1.4s ease-out forwards;
   opacity: 0;
 }
 
+
+
 @keyframes slideInLeft {
   from {
-    transform: translateX(-100%);
+    transform: translateX(-20px);
     opacity: 0;
   }
   to {
