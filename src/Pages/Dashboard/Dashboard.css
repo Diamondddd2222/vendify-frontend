@@ -223,12 +223,6 @@
 
 .create-store-card {
   position: relative; 
-  /* background-color: #ffcc00; */
-  /* background: rgba(255, 255, 255, 0.05); */
-  /* border: 1px solid #333; */
-    
-  
-  
   width: 100%;
   text-align: center;
   transition: all 0.3s ease;
@@ -237,6 +231,12 @@
     flex-direction: column;
   gap: 10px;
   align-items: center;
+
+   max-width: 600px;   /* or whatever width fits your design */
+          /* allow scaling on smaller screens */
+  margin: 0 auto;      /* center horizontally */
+  padding: 10px;      /* optional inner padding */
+  box-sizing: border-box; 
 }
 .create-store-card:hover {
   transform: scale(1.02);

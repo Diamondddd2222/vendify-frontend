@@ -175,7 +175,7 @@ useEffect(() => {
 
       {/* Vendor Feed */}
       <section className="vendor-feed">
-        <h2 className="vendors-texts">Vendors You May Know</h2>
+        <h2 className="vendors-texts">Vendors you may know</h2>
         <div className="vendor-grid">
           {users.slice(0, 6).map((vendor, i) => (
             <div className="vendor-card" key={i}>
