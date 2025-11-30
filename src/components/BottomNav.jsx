@@ -11,7 +11,7 @@ export default function BottomNav() {
   };
   return (
     <div className="bottom-nav">
-      <Link to="/" className="nav-item" onClick={ () => handleNavClick("/") }>
+      <Link to="/dashboard" className="nav-item" onClick={ () => handleNavClick("/dashboard") }>
         <AiFillHome className="icon-footer" />
         <span>Home</span>
       </Link>
