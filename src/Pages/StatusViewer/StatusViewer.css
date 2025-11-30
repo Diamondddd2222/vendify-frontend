@@ -361,7 +361,7 @@ body {
   font-size: 14px;
 } */
 .sv-send-btn {
-  background: #0066ff;
+  background: var(--vendify);
   color: #fff;
   border: none;
   padding: 10px 18px;
