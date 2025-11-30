@@ -1,5 +1,5 @@
-:root{
-  --vendify: #d1a700; /* default Vendify gold — change to your brand color */
+/* :root{
+  --vendify: #d1a700; 
   --bg: #000;
 }
 
@@ -14,7 +14,6 @@
   touch-action: pan-y;
 }
 
-/* topbar */
 .sv-topbar {
   display: flex;
   align-items: center;
@@ -77,7 +76,7 @@
   cursor: pointer;
 }
 
-/* progress bar row */
+
 .sv-progress-row {
   display: flex;
   gap: 6px;
@@ -105,7 +104,7 @@
   width: 100% !important;
 }
 
-/* media area */
+
 .sv-media {
   flex: 1;
   display: flex;
@@ -125,7 +124,7 @@
   object-position: center;
 }
 
-/* caption overlay */
+
 .sv-caption {
   position: absolute;
   left: 12px;
@@ -139,7 +138,7 @@
   backdrop-filter: blur(6px);
 }
 
-/* invisible left/right zones for fast tap */
+
 .sv-left-zone, .sv-right-zone {
   position: absolute;
   top: 0;
@@ -150,14 +149,14 @@
 .sv-left-zone { left: 0; }
 .sv-right-zone { right: 0; }
 
-/* small screen adjustments */
+
 @media (max-width: 420px) {
   .sv-avatar { width: 38px; height: 38px; }
   .sv-progress-row { padding: 8px 10px 0 10px; gap: 5px; }
   .sv-caption { font-size: 14px; bottom: 16px; left: 10px; right: 10px; }
 }
 
-/* fallback empty viewer */
+
 .status-viewer-empty {
   height: 100vh;
   display: flex;
@@ -171,4 +170,170 @@
   border: none;
   color: #000;
   font-weight: 700;
+} */
+
+:root {
+  --vendify: #7b2cbf; /* Purple accent */
+  --bg-dark: #000;
+  --white: #fff;
+  --fade-text: rgba(255, 255, 255, 0.6);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.sv-container {
+  height: 100vh;
+  width: 100vw;
+  background: #000;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--white);
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* TOP BAR */
+.sv-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  z-index: 10;
+}
+
+.sv-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sv-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sv-avatar-fallback {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--vendify);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.sv-brand {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.sv-time {
+  font-size: 12px;
+  color: var(--fade-text);
+}
+
+.sv-close {
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  color: var(--white);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* PROGRESS BAR */
+.sv-progress {
+  display: flex;
+  gap: 5px;
+  padding: 0 10px;
+  margin-top: -5px;
+}
+
+.sv-segment {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sv-fill {
+  height: 100%;
+  background: var(--vendify);
+  transition: width 0.05s linear;
+}
+
+/* MEDIA */
+.sv-media {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+}
+
+.sv-el {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* CAPTION */
+.sv-caption {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 100%;
+  padding: 0 20px;
+  font-size: 17px;
+  color: var(--white);
+  text-shadow: 0px 0px 5px #000;
+}
+
+/* MESSAGE INPUT AREA */
+.sv-message-bar {
+  width: 100%;
+  display: flex;
+  padding: 12px;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 20;
+  margin-bottom: 0px;
+}
+
+.sv-input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.sv-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sv-send-btn {
+  padding: 10px 18px;
+  background: var(--vendify);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
 }
