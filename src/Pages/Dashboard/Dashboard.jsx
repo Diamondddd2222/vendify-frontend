@@ -1,192 +1,178 @@
-import React, { useEffect, useState } from "react";
+
+// FULL DASHBOARD USING REACT QUERY + CONTENT-AWARE SKELETONS
+
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import API from "../../utils/api";
 import { FaRegBell } from "react-icons/fa";
 import { SlEarphonesAlt } from "react-icons/sl";
 import bgVideo from "../../assets/vendifyVideo.mp4";
-import { Link, useNavigate } from "react-router-dom";
 import TrueDashboard from "./TrueDashboard.jsx";
 import FalseDashboard from "./FalseDashboard.jsx";
 import MessageBar from "../../components/MessageBar.jsx";
-import "./Dashboard.css";
-import Loader from "../../components/Loader.jsx";
 import BottomNav from "../../components/BottomNav.jsx";
+import "./Dashboard.css";
+import StorySkeleton from "../../components/skeletons/StorySkeleton.jsx";
+import VendorCardSkeleton from "../../components/skeletons/VendorCardSkeleton.jsx";
+import StoreDashboardSkeleton from "../../components/skeletons/StoreDashboardSkeleton.jsx";
+
+// ---------------------------------------------------------
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [storeLink, setStoreLink] = useState("");
-  const [storeId, setStoreId] = useState("");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
-  const [store, setStore] = useState({});
-  const [stores, setStores] = useState([]);
+
   const user = JSON.parse(localStorage.getItem("user"));
-//   const store = JSON.parse(localStorage.getItem("store"));
-  const [storeBrand, setStoreBrand] = useState("");
-  console.log("User data in Dashboard:", user)
-  
 
-
-
-useEffect(() => {
-  const fetchStores = async () => {
-    try {
+  // ------------------ React Query: Fetch Stores ------------------
+  const {
+    data: stores = [],
+    isLoading: loadingStores,
+  } = useQuery({
+    queryKey: ["storesList"],
+    queryFn: async () => {
       const res = await API.get("/api/stores/reqstores");
-      const fetchedStores = res.data.allStores;
-      setStores(fetchedStores);
-      console.log("Fetched stores directly:", fetchedStores); // log here
-    } catch (err) {
-      console.error("Failed to load stores", err);
-    }
-  };
-  fetchStores();
-}, []);
+      return res.data.allStores;
+    },
+  });
 
+  // ------------------ React Query: Fetch Users ------------------
+  const {
+    data: users = [],
+    isLoading: loadingUsers,
+  } = useQuery({
+    queryKey: ["usersList"],
+    queryFn: async () => {
+      const res = await API.get("/api/users");
+      return res.data;
+    },
+  });
 
-
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await API.get("/api/users");
-        setUsers(res.data);
-      } catch (err) {
-        console.error("Failed to load users", err);
-      }
-    };
-    fetchUsers();
-  }, []);
-
-  useEffect(() => {
-  const fetchUserStore = async () => {
-    try {
-      console.log("Fetching store for user:", user?.email);
-      const token = localStorage.getItem("token");
-      console.log("Using token:", token);
-
+  // ------------------ React Query: Fetch User Store ------------------
+  const {
+    data: storeData,
+    isLoading: loadingStore,
+  } = useQuery({
+    queryKey: ["userStore"],
+    queryFn: async () => {
       const res = await API.get("/api/stores");
-      console.log("Store fetch response:", res.data);
+      return res.data.store;
+    },
+  });
 
-      const store = res.data.store;
+  const store = storeData || null;
 
-      // -------------- NEW CLEAN WWW LINK FORMAT ----------------
-      const url = new URL(window.location.href);
+  // Create store link
+  let storeLink = null;
+  let storeId = null;
 
-      // force hostname to always include www.
-      const hostname = `www.${url.hostname.replace(/^www\./, "")}`;
+  if (store) {
+    const url = new URL(window.location.href);
+    const hostname = `www.${url.hostname.replace(/^www\\./, "")}`;
+    storeLink = `${hostname}/stores/${store.storeLink}`;
+    storeId = store._id;
 
-      const publicLink = `${hostname}/stores/${store.storeLink}`;
-      console.log("Public WWW link:", publicLink);
-
-      // ----------------------------------------------------------
-
-      setStoreLink(publicLink);
-      setStoreId(store._id);
-      setStore(store);
-
-      localStorage.setItem("Storelink", publicLink);
-      localStorage.setItem("storeId", store._id);
-
-    } catch (err) {
-      console.error("User has no store yet:", err.response?.data?.message);
-      setTimeout(() => {
-        setType("pending");
-        setMessage("Create a store to get started!");
-      }, 1000);
-      setMessage("");
-      setStoreLink(null);
-    } finally {
-      // Hide message after 4 seconds
-      setTimeout(() => setMessage(""), 4000);
-    }
-  };
-
-  fetchUserStore();
-}, []);
-
-
-
- 
- 
-
+    localStorage.setItem("Storelink", storeLink);
+    localStorage.setItem("storeId", storeId);
+  }
 
   return (
-    <><div className="dashboard-container">
-      <MessageBar type={type} message={message} />
-      <video className="bg-video-auth" autoPlay loop muted playsInline>
-        <source src={bgVideo} type="video/mp4" />
-      </video>
-      <div className="overlay-auth-dashboard"></div>
-      {/* Header */}
-      <header className="dashboard-header">
-        <div className="h-section">
-          <h1 className="text-brand">
-            Hey, <span className="highlight">{user?.name || "Vendor"}</span>
-          </h1>
-          <div className="h-icons">
+    <>
+      <div className="dashboard-container">
+        <MessageBar type={type} message={message} />
 
-            <FaRegBell className="notification-bell" />
-            <SlEarphonesAlt className="customer-support" />
+        {/* Background Video */}
+        <video className="bg-video-auth" autoPlay loop muted playsInline>
+          <source src={bgVideo} type="video/mp4" />
+        </video>
+        <div className="overlay-auth-dashboard"></div>
+
+        {/* Header */}
+        <header className="dashboard-header">
+          <div className="h-section">
+            <h1 className="text-brand">
+              Hey, <span className="highlight">{user?.name || "Vendor"}</span>
+            </h1>
+
+            <div className="h-icons">
+              <FaRegBell className="notification-bell" />
+              <SlEarphonesAlt className="customer-support" />
+            </div>
           </div>
 
-        </div>
+          <p>
+            Grow your store and connect with vendors on{" "}
+            <span className="highlight-p">Vendify</span>
+          </p>
+        </header>
 
-        {/* <h1 className="welcome-text">Welcome, <span className="highlight">{user?.name || "Vendor"}</span> 👋</h1> */}
-        <p>Grow your store and connect with vendors on <span className="highlight-p">Vendify</span></p>
-      </header>
-
-      {/* Create Store */}
-      <section className="create-store-section">
-        {storeLink ? <TrueDashboard storeLink={storeLink} storeId={storeId} /> : <FalseDashboard />}
-      </section>
-
-
-      {/* Stories Section */}
-      <section className="stories-section">
-        <h2 className="recent-text">Recent updates</h2>
-        <div className="stories-container">
-          {stores.length > 0 ? (
-            stores.map((store, index) => (
-              <div className="story" key={index}>
-                <div className="story-ring">
-                  <div className="story-inner">
-                    {store.logoUrl ? (
-                      <img
-                        src={store.logoUrl}
-                        alt={store.name}
-                        className="story-logo" />
-                    ) : (
-                      <span className="story-text">
-                        {store.name.charAt(0).toUpperCase()}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <p className="story-name">{store.name.split(" ")[0]}</p>
-              </div>
-            ))
+        {/* Store Section */}
+        <section className="create-store-section">
+          {loadingStore ? (
+            <StoreDashboardSkeleton />
+          ) : store ? (
+            <TrueDashboard storeLink={storeLink} storeId={storeId} />
           ) : (
-            <p className="loading-text"><Loader /></p>
+            <FalseDashboard />
           )}
-        </div>
+        </section>
 
-      </section>
+        {/* Stories Section */}
+        <section className="stories-section">
+          <h2 className="recent-text">Recent updates</h2>
+          <div className="stories-container">
+            {loadingStores ? (
+              [...Array(6)].map((_, i) => <StorySkeleton key={i} />)
+            ) : stores.length > 0 ? (
+              stores.map((store, index) => (
+                <div className="story" key={index}>
+                  <div className="story-ring">
+                    <div className="story-inner">
+                      {store.logoUrl ? (
+                        <img
+                          src={store.logoUrl}
+                          alt={store.name}
+                          className="story-logo"
+                        />
+                      ) : (
+                        <span className="story-text">
+                          {store.name.charAt(0).toUpperCase()}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <p className="story-name">{store.name.split(" ")[0]}</p>
+                </div>
+              ))
+            ) : (
+              <p>No recent updates</p>
+            )}
+          </div>
+        </section>
 
+        {/* Vendor Feed */}
+        <section className="vendor-feed">
+          <h2 className="vendors-texts">Vendors you may know</h2>
 
+          <div className="vendor-grid">
+            {loadingUsers ? (
+              [...Array(6)].map((_, i) => <VendorCardSkeleton key={i} />)
+            ) : (
+              users.slice(0, 6).map((vendor, i) => (
+                <div className="vendor-card" key={i}>
+                  <h4>{vendor.name}</h4>
+                  <p>{vendor.email}</p>
 
-      {/* Vendor Feed */}
-      <section className="vendor-feed">
-        <h2 className="vendors-texts">Vendors you may know</h2>
-        <div className="vendor-grid">
-          {users.slice(0, 6).map((vendor, i) => (
-            <div className="vendor-card" key={i}>
-              <h4>{vendor.name}</h4>
-              <p>{vendor.email}</p>
-              <button className="view-btn">View Store</button>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div><BottomNav /></>
+                  <button className="view-btn">View Store</button>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+      </div>
+
+      <BottomNav />
+    </>
   );
 };
 
