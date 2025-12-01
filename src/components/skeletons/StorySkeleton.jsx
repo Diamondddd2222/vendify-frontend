@@ -1,6 +1,6 @@
 export default function StorySkeleton() {
   return (
-    <div className="story-skeleton">
+    <div className="story-skeleton skeleton">
       <div className="skeleton story-skeleton-avatar" />
 
       <div style={{ flex: 1 }}>
