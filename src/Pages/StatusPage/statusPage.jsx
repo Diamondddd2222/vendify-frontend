@@ -48,28 +48,41 @@ const StatusPage = () => {
   }, []);
 
   // Upload file
-  const handleFileChange = async (e) => {
-    try {
-      const file = e.target.files[0];
-      if (!file) return;
+  // const handleFileChange = async (e) => {
+  //   try {
+  //     const file = e.target.files[0];
+  //     if (!file) return;
 
-      const form = new FormData();
-      form.append("media", file);
+  //     const form = new FormData();
+  //     form.append("media", file);
 
-      const res = await API.post("/api/status/upload", form, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+  //     const res = await API.post("/api/status/upload", form, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
 
-      const mediaUrl = res.data.mediaUrl;
-      const mediaType = file.type.startsWith("video") ? "video" : "image";
+  //     const mediaUrl = res.data.mediaUrl;
+  //     const mediaType = file.type.startsWith("video") ? "video" : "image";
 
-      navigate("/add-caption", {
-        state: { mediaUrl, mediaType },
-      });
-    } catch (error) {
-      console.error("Upload failed:", error);
-    }
-  };
+  //     navigate("/add-caption", {
+  //       state: { mediaUrl, mediaType },
+  //     });
+  //   } catch (error) {
+  //     console.error("Upload failed:", error);
+  //   }
+  // };
+
+  const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const preview = URL.createObjectURL(file);
+  const mediaType = file.type.startsWith("video") ? "video" : "image";
+
+  navigate("/add-caption", {
+    state: { file, preview, mediaType },
+  });
+};
+
 
   // Logic to click avatar
   const handleMyStatusClick = () => {
