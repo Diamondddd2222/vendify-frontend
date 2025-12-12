@@ -1,53 +1,4 @@
-/* .caption-page {
-  padding: 20px;
-  text-align: center;
-  color: white;
-  background: #000;
-  height: 100vh;
-}
-
-.preview-circle {
-  width: 130px;
-  height: 130px;
-  margin: 20px auto;
-  padding: 4px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, #e2df07, #5a5a5a);
-}
-
-.inner-circle {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 50%;
-  background: black;
-}
-
-.inner-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.caption-input {
-  width: 90%;
-  height: 100px;
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-}
-
-.submit-caption {
-  margin-top: 20px;
-  padding: 12px 20px;
-  border: none;
-  background: #e2df07;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-} */
+/* 
 .caption-container {
   height: 100vh;
   width: 100%;
@@ -56,25 +7,11 @@
   overflow: hidden;
 }
 
-/* .media-preview {
-  width: 100%;
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #000;
-}
 
-.media-preview img,
-.media-preview video {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-} */
 
 .media-preview {
   width: 100%;
-  height: 88vh; /* fills almost full screen */
+  height: 88vh; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,8 +24,8 @@
 .media-preview video {
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* fills the screen without distortion */
-  object-position: center; /* always center the media */
+  object-fit: cover;   
+  object-position: center;
 }
 
 
@@ -118,6 +55,86 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.send-btn {
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+  background: #e2df07;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+
+/* FULL SCREEN PAGE */
+.caption-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden; /* prevents scrolling completely */
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* WHATSAPP-STYLE MEDIA AREA */
+.media-preview {
+  flex: 1; /* takes all remaining height above caption bar */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.media-preview img,
+.media-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* IMPORTANT → makes the input bar visible */
+  object-position: center;
+}
+
+
+/* FIXED CAPTION BAR */
+.caption-bar {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  position: relative;
+}
+
+
+/* INPUT */
+.caption-input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(136, 135, 135, 0.99);
+  color: white;
+  outline: none;
+  font-size: 16px;
+}
+
+.caption-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* SEND BUTTON */
 .send-btn {
   width: 45px;
   height: 45px;
