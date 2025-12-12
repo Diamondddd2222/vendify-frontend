@@ -112,7 +112,7 @@ export default function AddCaption() {
     try {
       // 1️⃣ Upload actual file to backend/cloudinary
       const form = new FormData();
-      form.append("file", file);
+      form.append("media", file);
 
       const uploadRes = await API.post("/api/status/upload", form, {
         headers: { "Content-Type": "multipart/form-data" },
