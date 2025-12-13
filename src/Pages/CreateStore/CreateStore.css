@@ -1,149 +1,163 @@
 /* ===============================
-   CreateStore Page Styling
-   =============================== */
+   PAGE BACKGROUND (MODERN APP)
+================================ */
 
-/* --- Global Layout --- */
-.create-store-form {
-  position: relative;
-  width: 100%;
+body {
+  background: radial-gradient(
+      1200px 600px at 10% -20%,
+      rgba(226, 223, 7, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      800px 500px at 90% 10%,
+      rgba(255, 255, 255, 0.04),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #0a0a0a, #000);
   min-height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  font-family: "Poppins", sans-serif;
+}
+
+/* Wrapper */
+.create-store-wrapper {
+  position: relative;
   z-index: 2;
+  padding: 20px;
+}
+
+/* ===============================
+   FORM CARD (FOCUS PANEL)
+================================ */
+
+.create-store-form {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 26px 24px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(18, 18, 18, 0.95),
+    rgba(10, 10, 10, 0.95)
+  );
+
+  border-radius: 10px;
   color: #fff;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* --- Background Video --- */
-.bg-video-auth {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+/* ===============================
+   PROGRESS
+================================ */
+
+.progress-wrapper {
+  margin-bottom: 22px;
+}
+
+.progress-track {
+  height: 6px;
+  background: #1f1f1f;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
   height: 100%;
-  object-fit: cover; /* makes sure video covers the screen */
-  z-index: -2;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    #e2df07,
+    #cfc80a
+  );
+  box-shadow: 0 0 6px rgba(226, 223, 7, 0.6);
+  transition: width 0.4s ease;
 }
 
-/* --- Overlay --- */
-.overlay-createPage {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 15, 15, 0.7); /* dark transparent overlay */
-  backdrop-filter: blur(4px); /* subtle glass effect */
-  z-index: -1;
+.progress-text {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 8px;
+  display: block;
 }
 
-/* --- Form Container --- */
-.create-store-form form {
-  width: 100%;
-  max-width: 480px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(6px);
-  border-radius: 3px;
-  padding: 40px 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-}
+/* ===============================
+   FORM CONTROLS
+================================ */
 
-/* --- Heading --- */
-.create-store-form h2 {
-  font-size: 2rem;
-  margin-bottom: 25px;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #fff;
-}
-
-/* --- Input Groups --- */
 .form-group {
-  margin-bottom: 18px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 16px;
 }
 
 .form-group label {
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-  color: #f1f1f1;
+  font-size: 12px;
+  color: #bdbdbd;
+  margin-bottom: 6px;
+  display: block;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
-  padding: 12px 14px;
-  font-size: 0.95rem;
-  border: none;
-  border-radius: 4px;
-  outline: none;
+  width: 100%;
+  background: #111;
+  border: 1px solid #2a2a2a;
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  transition: 0.3s ease;
+  padding: 10px;
+  border-radius: 6px;
+
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  background: rgba(255, 255, 255, 0.2);
-  border-left: 3px solid #00c4ff;
+  outline: none;
+  border-color: rgba(226, 223, 7, 0.6);
+  box-shadow: 0 0 0 1px rgba(226, 223, 7, 0.25);
 }
 
-/* --- Error Handling --- */
-.input-error {
-  border-left: 3px solid #ff4b4b !important;
+/* ===============================
+   BUTTONS
+================================ */
+
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
 }
 
-.error {
-  color: #ff6b6b;
-  font-size: 0.85rem;
-  margin-top: 4px;
-}
-
-/* --- File Input --- */
-input[type="file"] {
-  background: none;
-  color: #ddd;
+.btn {
+  padding: 9px 18px;
   border: none;
-  font-size: 0.9rem;
-}
-
-/* --- Submit Button --- */
-.submit-btn {
-  width: 100%;
-  /* background: linear-gradient(135deg, #00c4ff, #0078ff); */
-  background: linear-gradient(135deg, #ddda33, #fffb00);
-  color: rgb(0, 0, 0);
-  border: none;
-  border-radius: 5px;
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
+  font-weight: 600;
+  transition: all 0.25s ease;
 }
 
-.submit-btn:hover {
-  background: linear-gradient(135deg, #00aaff, #0058d4);
-  transform: scale(1.02);
+.btn.primary {
+  background: linear-gradient(
+    180deg,
+    #e2df07,
+    #c7c307
+  );
+  color: #000;
+  box-shadow: 0 4px 12px rgba(226, 223, 7, 0.4);
 }
 
-/* --- Responsive --- */
-@media (max-width: 600px) {
-  .create-store-form form {
-    padding: 30px 20px;
-  }
+.btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(226, 223, 7, 0.55);
+}
 
-  .create-store-form h2 {
-    font-size: 1.6rem;
-  }
+.btn.ghost {
+  background: transparent;
+  color: #aaa;
+}
+
+.btn.ghost:hover {
+  color: #fff;
 }

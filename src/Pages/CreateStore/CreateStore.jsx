@@ -3,10 +3,20 @@ import "./CreateStore.css";
 import MessageBar from "../../components/MessageBar.jsx";
 import LoadingSpinner from "../../components/Loader.jsx";
 import bgVideo from "../../assets/vendifyVideo.mp4";
-import API from "../../utils/api"; // your axios instance with baseURL + token interceptor
+import API from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+
+const TOTAL_STEPS = 3;
+
 const CreateStore = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [type, setType] = useState("");
+
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -15,13 +25,15 @@ const CreateStore = () => {
     phone: "",
     logo: null,
   });
-   const user = JSON.parse(localStorage.getItem("user"));
-  const [errors, setErrors] = useState({});
-  const [msg, setMsg] = useState("");
-  const [storeLink, setStoreLink] = useState("");
-  const [type, setType] = useState("");
-  const [loading, setLoading] = useState(false);
-  const categories = ['Fashion']
+
+  const categories = ["Fashion"];
+
+  useEffect(() => {
+    if (user?.email) {
+      setForm((prev) => ({ ...prev, email: user.email }));
+    }
+  }, [user?.email]);
+
   const handleChange = (e) => {
     if (e.target.files) {
       setForm({ ...form, logo: e.target.files[0] });
@@ -29,193 +41,194 @@ const CreateStore = () => {
       setForm({ ...form, [e.target.name]: e.target.value });
     }
   };
-  
 
-
-
-useEffect(() => {
-  if (user?.email) {
-    setForm(prev => ({ ...prev, email: user.email }));
-  }
-}, [user?.email]);
-
-
-    const validate = () => {
-    const newErrors = {};
-    if (!form.name) newErrors.name = "Store name is required";
-    if (!form.description) newErrors.description = "Description is required";
-    if (!form.category) newErrors.category = "Category is required";
-    if (!form.email) newErrors.email = "Email is required";
-    if (!form.phone) newErrors.phone = "Phone number is required";
-    if (!form.logo) newErrors.logo = "Store logo is required";
-
-    setMsg(newErrors[Object.keys(newErrors)[0] || ""] || "");
-    return Object.keys(newErrors).length === 0;
+  /* ---------------- VALIDATION PER STEP ---------------- */
+  const validateStep = () => {
+    if (step === 1) {
+      if (!form.name || !form.category || !form.description) {
+        setMsg("Please complete all store details");
+        setType("error");
+        return false;
+      }
+    }
+    if (step === 2) {
+      if (!form.email || !form.phone) {
+        setMsg("Please provide contact information");
+        setType("error");
+        return false;
+      }
+    }
+    if (step === 3) {
+      if (!form.logo) {
+        setMsg("Please upload a store logo");
+        setType("error");
+        return false;
+      }
+    }
+    setMsg("");
+    return true;
   };
 
+  const nextStep = () => {
+    if (validateStep()) setStep((s) => s + 1);
+  };
 
+  const prevStep = () => {
+    setMsg("");
+    setStep((s) => s - 1);
+  };
+
+  /* ---------------- SUBMIT ---------------- */
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setMsg("");
-  setType("");
-    if (!validate()) {
-        setType("error");
-        return ;
+    e.preventDefault();
+    if (!validateStep()) return;
+
+    try {
+      setLoading(true);
+
+      const data = new FormData();
+      Object.entries(form).forEach(([key, value]) =>
+        data.append(key, value)
+      );
+
+      const token = localStorage.getItem("token");
+
+      const res = await API.post("/api/stores/create", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setType("success");
+      setMsg("Store created successfully 🎉");
+
+      const store = res.data.store;
+      const url = new URL(window.location.href);
+      const hostname = `www.${url.hostname.replace(/^www\./, "")}`;
+      const publicLink = `${hostname}/stores/${store.storeLink}`;
+
+      localStorage.setItem("store", JSON.stringify(store));
+      localStorage.setItem("Storelink", publicLink);
+      localStorage.setItem("storeId", store._id);
+
+      setTimeout(() => navigate("/dashboard"), 2500);
+    } catch (err) {
+      setType("error");
+      setMsg(err.response?.data?.message || "Failed to create store");
+    } finally {
+      setLoading(false);
     }
-
-  try {
-  
-
-    setLoading(true);
-    console.log("Submitting form data:", form);
-      
-    const data = new FormData();
-    data.append("name", form.name);
-    data.append("category", form.category);
-    data.append("description", form.description || "");
-    data.append("email", form.email);
-    data.append("phone", form.phone);
-    if (form.logo) data.append("logo", form.logo);
-
-    // Option A (if API interceptor adds token automatically)
-    // const res = await API.post("/api/store/create", data);
-
-    // Option B (explicit)
-    const token = localStorage.getItem("token");
-    // Debug log the token and form data
-    console.log('Token:', token);
-    console.log('Form data entries:', [...data.entries()]);
-    
-    const res = await API.post("/api/stores/create", data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-     console.log("Sent:", form);
-    setType("success");
-    setMsg(res.data.message || "Store created successfully");
-    
-    // use slug returned by backend:
-    const storeId = res.data.store.userId;
-    console.log("Store created with ID:", storeId);
-    const myData = res.data.store;
-    // const url = new URL(window.location.href);
-    // url.hostname = `www.${url.hostname.replace(/^www\./, '')}`;
-    // const publicLink = `${url.origin}/stores/${res.data.store.storeLink}`;
-    // console.log(publicLink);
-    const url = new URL(window.location.href);
-    // always force hostname to include www.
-    const hostname = `www.${url.hostname.replace(/^www\./, "")}`;
-    const publicLink = `${hostname}/stores/${res.data.store.storeLink}`;
-    localStorage.setItem("publicStoreLink", publicLink);
-    console.log(publicLink);
-
-
-    // const publicLink = `${window.location.origin}/stores/${res.data.store.storeLink}`;
-    localStorage.setItem("store", JSON.stringify(myData));
-    // localStorage.setItem('store', res.data.store)
-    localStorage.setItem('Storelink', publicLink)
-    localStorage.setItem("storeId", res.data.store._id);
-    console.log(publicLink)
-    setStoreLink(publicLink);
-    // Redirect to dashboard after a short delay
-    setTimeout(() => navigate("/dashboard"), 3000);
-  } catch (err) {
-    setType("error");
-    setMsg(err.response?.data?.message || "Failed to create store");
-  } finally {
-    setTimeout(() => setMsg(""), 6000);
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className="create-store-form">
-        {loading && <LoadingSpinner />}
-        {msg && <MessageBar type={type} message={msg} />}
-        <video className="bg-video-auth" autoPlay loop muted playsInline preload="auto">
-                <source src={bgVideo} type="video/mp4" />
-              </video>
-              <div className="overlay-createPage"></div>
-        
+      {loading && <LoadingSpinner />}
+      {msg && <MessageBar type={type} message={msg} />}
+
+      {/* <video className="bg-video-auth" autoPlay loop muted playsInline>
+        <source src={bgVideo} type="video/mp4" />
+      </video>
+      <div className="overlay-createPage"></div> */}
+
+      {/* -------- PROGRESS -------- */}
+      <div className="progress-wrapper">
+        <div className="progress-track">
+          <div
+            className="progress-fill"
+            style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
+          />
+        </div>
+        <p className="progress-text">Step {step} of {TOTAL_STEPS}</p>
+      </div>
+
       <h2>Create Store</h2>
-      <form onSubmit={handleSubmit}>
-        {/* <input name="storeName" value={form.storeName} onChange={onChange} placeholder="Store name" required />
-        <input name="category" value={form.category} onChange={onChange} placeholder="Category" required />
-        <textarea name="description" value={form.description} onChange={onChange} placeholder="Description" />
-        <input type="file" name="logo" accept="image/*" onChange={onChange} />
-        <button type="submit">Create Store</button> */}
-        <div className="form-group">
-          <label>Store Name</label>
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            className={errors.name ? "input-error" : ""}
-          />
-          {errors.name && <span className="error">{errors.name}</span>}
-        </div>
 
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            className={errors.description ? "input-error" : ""}
-          />
-          {errors.description && <span className="error">{errors.description}</span>}
-        </div>
+      <form onSubmit={handleSubmit} className="step-form">
+        {/* STEP 1 */}
+        {step === 1 && (
+          <div className="step-card fade">
+            <div className="form-group">
+              <label>Store Name</label>
+              <input name="name" value={form.name} onChange={handleChange} />
+            </div>
 
-        <div className="form-group">
-          <label>Category</label>
-          <select
-            name="category"
-            value={form.category}
-            onChange={handleChange}
-            className={errors.category ? "input-error" : ""}
-          >
-            <option value="">Select category</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-          {errors.category && <span className="error">{errors.category}</span>}
-        </div>
+            <div className="form-group">
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={form.description}
+                onChange={handleChange}
+              />
+            </div>
 
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            className={errors.email ? "input-error" : ""}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
+            <div className="form-group">
+              <label>Category</label>
+              <select
+                name="category"
+                value={form.category}
+                onChange={handleChange}
+              >
+                <option value="">Select category</option>
+                {categories.map((cat) => (
+                  <option key={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
 
-        <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            type="text"
-            name="phone"
-            value={form.phone}
-            onChange={handleChange}
-            className={errors.phone ? "input-error" : ""}
-          />
-          {errors.phone && <span className="error">{errors.phone}</span>}
-        </div>
+        {/* STEP 2 */}
+        {step === 2 && (
+          <div className="step-card fade">
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+              />
+            </div>
 
-        <div className="form-group">
-          <label>Store Logo</label>
-          <input type="file" name="logo" accept="image/*" onChange={handleChange} />
-          {errors.logo && <span className="error">{errors.logo}</span>}
-        </div>
+            <div className="form-group">
+              <label>Phone Number</label>
+              <input
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        )}
 
-        <button type="submit" className="submit-btn">Create Store</button>
+        {/* STEP 3 */}
+        {step === 3 && (
+          <div className="step-card fade">
+            <div className="form-group">
+              <label>Store Logo</label>
+              <input type="file" accept="image/*" onChange={handleChange} />
+            </div>
+          </div>
+        )}
+
+        {/* ACTIONS */}
+        <div className="step-actions">
+          {step > 1 && (
+            <button type="button" className="secondary-btn" onClick={prevStep}>
+              Back
+            </button>
+          )}
+          {step < TOTAL_STEPS ? (
+            <button type="button" className="primary-btn" onClick={nextStep}>
+              Continue
+            </button>
+          ) : (
+            <button type="submit" className="primary-btn">
+              Create Store
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
