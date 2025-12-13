@@ -1,14 +1,11 @@
-
-
 /* Container for safety icon + link */
-.store-link-true{
+.store-link-true {
   text-decoration: none;
   cursor: pointer;
   position: relative;
-  z-index: 9999; 
+  z-index: 9999;
   color: white;
   font-size: 0.7rem;
-
 }
 
 .link-txt {
@@ -36,7 +33,7 @@
   text-decoration: none;
   cursor: pointer;
   position: relative;
-  z-index: 9999; 
+  z-index: 9999;
   color: white;
   font-size: 0.7rem;
   margin-right: 5px;
@@ -51,12 +48,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: inline-block; 
+  display: inline-block;
   font-weight: 400;
   color: black;
   background-color: transparent;
   border: none;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 /* Responsive tweaks for screen < 400px */
@@ -78,7 +75,6 @@
   }
 }
 
-
 @media screen and (max-width: 400px) {
   .create-btn-true {
     font-size: 0.7rem;
@@ -98,45 +94,79 @@
 
 .create-btn-true {
   position: relative;
-  background: #020100;
+  background: linear-gradient(
+    180deg,
+    #0a0a08 0%,
+    #020100 100%
+  );
   color: #e2df07;
   border: none;
-  padding: 5px 16px;
-  border-radius: 3px;
+  padding: 6px 18px;
+  border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
-  overflow: hidden; /* Ensures the animation stays within the button */
+  letter-spacing: 0.2px;
+  overflow: hidden;
   z-index: 1;
-} 
 
-/* Moving gradient border */
+  transition: 
+    color 0.25s ease,
+    transform 0.15s ease;
+}
+
+/* Animated gradient border */
 .create-btn-true::before {
   content: "";
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(120deg, #e2df07, #000, #e2df07, #000);
-  background-size: 300% 300%;
-  border-radius: 0px;
-  z-index: -1;
-  animation: borderMove 6s linear infinite;
+  inset: -1.5px;
+  background: linear-gradient(
+    120deg,
+    #e2df07,
+    #1a1a1a,
+    #e2df07
+  );
+  background-size: 200% 200%;
+  animation: borderMove 5s linear infinite;
+  z-index: -2;
+  border-radius: 5px;
 }
 
-/* Dark background layer to keep button body clean */
+/* Button inner surface */
 .create-btn-true::after {
   content: "";
   position: absolute;
-  top: 2px;
-  left: 2px;
-  right: 2px;
-  bottom: 2px;
-  background: #020100;
-  border-radius: 0px;
+  inset: 1.5px;
+  background: linear-gradient(
+    180deg,
+    #0a0a08f3 0%,
+    #020100be 100%
+  );
+  border-radius: 3px;
   z-index: -1;
 }
+
+/* Hover — subtle, controlled */
+.create-btn-true:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Active — tactile feedback */
+.create-btn-true:active {
+  transform: translateY(0);
+  opacity: 0.95;
+}
+
+/* Border animation */
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
 
 /* Gradient movement */
 @keyframes borderMove {
@@ -151,16 +181,16 @@
   }
 }
 
-.creating-store{
-     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 70px;
-    width: 100%;
-    padding: 8px 10px
+.creating-store {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 70px;
+  width: 100%;
+  padding: 8px 10px;
 }
 
-.open-icon{
-  font-size: .85rem;
+.open-icon {
+  font-size: 0.85rem;
   margin-left: 3px;
 }
