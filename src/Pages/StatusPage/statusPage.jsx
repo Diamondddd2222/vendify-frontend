@@ -11,9 +11,9 @@ const StatusPage = () => {
   const [statuses, setStatuses] = useState([]);
   const [myStatuses, setMyStatuses] = useState([]);
   const [myId, setMyId] = useState(null);
-  const [loading, setLoading] = useState(true); // ← ADDED
+  const [loading, setLoading] = useState(true);
 
-  // Decode JWT manually (safe)
+  // Decode JWT manually
   const decodeToken = () => {
     try {
       const token = localStorage.getItem("token");
@@ -31,7 +31,6 @@ const StatusPage = () => {
       try {
         const res = await API.get("/api/status/all");
         const allStatuses = res.data.statuses || [];
-        console.log("All Status", allStatuses);
 
         const id = decodeToken();
         setMyId(id);
@@ -43,7 +42,7 @@ const StatusPage = () => {
       } catch (error) {
         console.error("Failed to fetch statuses:", error);
       } finally {
-        setLoading(false); // ← ADDED
+        setLoading(false);
       }
     };
 
@@ -62,7 +61,6 @@ const StatusPage = () => {
     });
   };
 
-  // Logic to click avatar
   const handleMyStatusClick = () => {
     if (myStatuses.length === 0) {
       document.getElementById("statusUpload").click();
@@ -71,27 +69,34 @@ const StatusPage = () => {
     }
   };
 
-  const handleAnotherUpload = () => {
-    document.getElementById("statusUpload").click();
-  };
+  // Group statuses by user (WhatsApp-style)
+  const groupedStatuses = statuses.reduce((acc, status) => {
+    const userId = status.userId?._id;
+    if (!userId) return acc;
 
-  // ---------- SKELETON COMPONENT (FOR RECENT UPDATES ONLY) ----------
- const SkeletonItem = () => (
-  <div className="recent-item">
-    {/* SKELETON AVATAR */}
-    <div className="status-ring skeleton-avatar">
-      <div className="status-ring-inner"></div>
+    if (!acc[userId]) {
+      acc[userId] = {
+        user: status.userId,
+        statuses: [],
+      };
+    }
+
+    acc[userId].statuses.push(status);
+    return acc;
+  }, {});
+
+  // Skeleton
+  const SkeletonItem = () => (
+    <div className="recent-item">
+      <div className="status-ring skeleton-avatar">
+        <div className="status-ring-inner"></div>
+      </div>
+      <div className="sv-meta">
+        <div className="skeleton-line skeleton-name"></div>
+        <div className="skeleton-line skeleton-time"></div>
+      </div>
     </div>
-
-    {/* TEXT SKELETONS */}
-    <div className="sv-meta">
-      <div className="skeleton-line skeleton-name"></div>
-      <div className="skeleton-line skeleton-time"></div>
-    </div>
-  </div>
-);
-
-  // ------------------------------------------------------------------
+  );
 
   return (
     <>
@@ -125,7 +130,6 @@ const StatusPage = () => {
 
             <input
               type="file"
-              name="media"
               id="statusUpload"
               accept="image/*,video/*"
               style={{ display: "none" }}
@@ -133,7 +137,6 @@ const StatusPage = () => {
             />
           </div>
 
-          {/* My Store Title + Camera Upload */}
           <div className="flex-status-bar">
             <div className="add-status-updates">
               <h2 className="my-store-title">My Store</h2>
@@ -146,7 +149,6 @@ const StatusPage = () => {
               </label>
               <input
                 type="file"
-                name="media"
                 id="cameraUpload"
                 accept="image/*,video/*"
                 style={{ display: "none" }}
@@ -160,7 +162,6 @@ const StatusPage = () => {
         <h3 className="recent-title">Recent Updates</h3>
 
         <div className="recent-list">
-          {/* SHOW SKELETON WHEN LOADING */}
           {loading ? (
             <>
               <SkeletonItem />
@@ -168,35 +169,49 @@ const StatusPage = () => {
               <SkeletonItem />
               <SkeletonItem />
               <SkeletonItem />
-              <SkeletonItem />
-              <SkeletonItem />
-              <SkeletonItem />
+               <SkeletonItem />
               <SkeletonItem />
               <SkeletonItem />
               <SkeletonItem />
             </>
           ) : (
-            statuses.map((status) => (
-              <div
-                key={status._id}
-                className="recent-item"
-                onClick={() =>
-                  navigate("/status-viewer", { state: { statuses: [status] } })
-                }
-              >
-                <div className="status-ring">
-                  <div className="status-ring-inner">
-                    <img src={status.mediaUrl} alt={status.userId.brandName} />
+            Object.values(groupedStatuses).map(({ user, statuses }) => {
+              const latestStatus = statuses[statuses.length - 1];
+              const count = statuses.length;
+              const step = 360 / count;
+              const gap = 4; // degrees between segments
+
+              // Create conic-gradient for segmented ring
+              const segments = Array.from({ length: count })
+                .map((_, i) => `#e2df07 ${i * step}deg ${(i + 1) * step - gap}deg`)
+                .join(", ");
+
+              return (
+                <div
+                  key={user._id}
+                  className="recent-item"
+                  onClick={() =>
+                    navigate("/status-viewer", { state: { statuses } })
+                  }
+                >
+                  <div
+                    className="status-ring segmented"
+                    style={{ background: `conic-gradient(${segments}, #111 0deg)` }}
+                  >
+                    <div className="status-ring-inner">
+                      <img src={latestStatus.mediaUrl} alt={user.brandName} />
+                    </div>
+                  </div>
+
+                  <div className="sv-meta">
+                    <h4 className="recent-name">{user.brandName}</h4>
+                    <p className="recent-time">
+                      {new Date(latestStatus.createdAt).toLocaleString()}
+                    </p>
                   </div>
                 </div>
-                <div className="sv-meta">
-                  <h4 className="recent-name">{status.userId.brandName}</h4>
-                  <p className="recent-time">
-                    {new Date(status.createdAt).toLocaleString()}
-                  </p>
-                </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </div>

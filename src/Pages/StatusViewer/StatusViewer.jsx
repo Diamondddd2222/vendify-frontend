@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./StatusViewer.css";
@@ -38,176 +37,125 @@ export default function StatusViewer() {
     mediaItems.map((m) => (m.mediaType === "image" ? IMAGE_DURATION : VIDEO_FALLBACK))
   );
 
-  // touch
   const startX = useRef(0);
   const startY = useRef(0);
 
-  // NEXT
-  // const goNext = useCallback(() => {
-  //   if (index < mediaItems.length - 1) {
-  //     setIndex((i) => i + 1);
-  //     setProgress(0);
-  //     elapsed.current = 0;
-  //   } else {
-  //     navigate('/Status');
-  //   }
-  // }, [index, mediaItems.length, navigate]);
-
+  // ----- NAVIGATION -----
   const goNext = useCallback(() => {
-  if (index < mediaItems.length - 1) {
-    setIndex(i => i + 1);
-  } else {
-    navigate("/Status");
-  }
-}, [index, mediaItems.length, navigate]);
-
-
-  // PREV
-  const goPrev = useCallback(() => {
-    if (index > 0) {
-      setIndex((i) => i - 1);
-    } else {
-      navigate('/Status');
-    }
-  }, [index, navigate]);
-
-  // TIMER
-  // const startTimer = useCallback(
-  //   (duration) => {
-  //     if (timer.current) clearInterval(timer.current);
-
-  //     startTime.current = Date.now() - elapsed.current;
-
-  //     timer.current = setInterval(() => {
-  //       if (paused || holding.current) return;
-
-  //       elapsed.current = Date.now() - startTime.current;
-  //       const p = Math.min(elapsed.current / duration, 1);
-  //       setProgress(p);
-
-  //       if (p >= 1) {
-  //         clearInterval(timer.current);
-  //         timer.current = null;
-  //         goNext();
-  //       }
-  //     }, 50);
-  //   },
-  //   [paused, goNext]
-  // );
-
- const startTimer = useCallback((duration) => {
-  if (timer.current) clearInterval(timer.current);
-
-  startTime.current = Date.now() - elapsed.current;
-
-  timer.current = setInterval(() => {
-    if (paused || holding.current) return;
-
-    elapsed.current = Date.now() - startTime.current;
-    const p = Math.min(elapsed.current / duration, 1);
-    setProgress(p);
-
-    if (p >= 1) {
-      clearInterval(timer.current);
-      timer.current = null;
-      goNext();
-    }
-  }, 50);
-}, [paused, goNext]);
-
-
-
-  // ON INDEX CHANGE
-  // useEffect(() => {
-  //   setProgress(0);
-  //   elapsed.current = 0;
-
-  //   const current = mediaItems[index];
-
-  //   if (current.mediaType === "video" && videoRef.current) {
-  //     const v = videoRef.current;
-
-  //     // If metadata already loaded
-  //     if (!isNaN(v.duration) && v.duration > 0) {
-  //       durations.current[index] = v.duration * 1000;
-  //       startTimer(durations.current[index]);
-  //     }
-  //   } else {
-  //     startTimer(durations.current[index]);
-  //   }
-
-  //   return () => timer.current && clearInterval(timer.current);
-  // }, [index, mediaItems, startTimer]);
-
-  useEffect(() => {
-  const current = mediaItems[index];
-
-  if (!current) return;
-
-  // IMAGE STATUS
-  if (current.mediaType !== "video") {
-    startTimer(durations.current[index]);
-    return;
-  }
-
-  // VIDEO STATUS
-  const v = videoRef.current;
-  if (!v) return;
-
-  const onLoadedMetadata = () => {
-    durations.current[index] = v.duration * 1000;
-    startTimer(durations.current[index]);
-  };
-
-  // If metadata already loaded
-  if (!isNaN(v.duration) && v.duration > 0) {
-    onLoadedMetadata();
-  } else {
-    v.addEventListener("loadedmetadata", onLoadedMetadata);
-  }
-
-  return () => {
     if (timer.current) {
       clearInterval(timer.current);
       timer.current = null;
     }
-    v?.removeEventListener("loadedmetadata", onLoadedMetadata);
-  };
-}, [index, mediaItems, startTimer]);
+    elapsed.current = 0;
+    setProgress(0);
 
+    if (index < mediaItems.length - 1) {
+      setIndex((i) => i + 1);
+    } else {
+      navigate("/Status");
+    }
+  }, [index, mediaItems.length, navigate]);
 
-  // VIDEO metadata
+  const goPrev = useCallback(() => {
+    if (timer.current) {
+      clearInterval(timer.current);
+      timer.current = null;
+    }
+    elapsed.current = 0;
+    setProgress(0);
+
+    if (index > 0) {
+      setIndex((i) => i - 1);
+    } else {
+      navigate("/Status");
+    }
+  }, [index, navigate]);
+
+  // ----- TIMER -----
+  const startTimer = useCallback(
+    (duration) => {
+      if (timer.current) clearInterval(timer.current);
+
+      startTime.current = Date.now() - elapsed.current;
+
+      timer.current = setInterval(() => {
+        if (paused || holding.current) return;
+
+        elapsed.current = Date.now() - startTime.current;
+        const p = Math.min(elapsed.current / duration, 1);
+        setProgress(p);
+
+        if (p >= 1) {
+          clearInterval(timer.current);
+          timer.current = null;
+          goNext();
+        }
+      }, 50);
+    },
+    [paused, goNext]
+  );
+
+  // ----- EFFECT TO START TIMER -----
+  useEffect(() => {
+    const current = mediaItems[index];
+    if (!current) return;
+
+    if (current.mediaType !== "video") {
+      startTimer(durations.current[index]);
+      return;
+    }
+
+    const v = videoRef.current;
+    if (!v) return;
+
+    const onLoadedMetadata = () => {
+      durations.current[index] = v.duration * 1000;
+      startTimer(durations.current[index]);
+    };
+
+    if (!isNaN(v.duration) && v.duration > 0) {
+      onLoadedMetadata();
+    } else {
+      v.addEventListener("loadedmetadata", onLoadedMetadata);
+    }
+
+    return () => {
+      if (timer.current) {
+        clearInterval(timer.current);
+        timer.current = null;
+      }
+      v?.removeEventListener("loadedmetadata", onLoadedMetadata);
+    };
+  }, [index, mediaItems, startTimer]);
+
+  // ----- VIDEO HANDLERS -----
   const onMeta = (e) => {
     const ms = Math.floor(e.target.duration * 1000);
     durations.current[index] = ms > 0 ? ms : VIDEO_FALLBACK;
     startTimer(durations.current[index]);
   };
 
-  // PAUSE + RESUME
-const pause = () => {
-  setPaused(true);
-  if (videoRef.current) videoRef.current.pause();
-};
+  const pause = () => {
+    setPaused(true);
+    if (videoRef.current) videoRef.current.pause();
+  };
 
+  const resume = () => {
+    setPaused(false);
+    if (videoRef.current) videoRef.current.play();
+  };
 
-const resume = () => {
-  setPaused(false);
-  if (videoRef.current) videoRef.current.play();
-};
+  const holdStart = () => {
+    holding.current = true;
+    pause();
+  };
 
+  const holdEnd = () => {
+    holding.current = false;
+    resume();
+  };
 
-const holdStart = () => {
-  holding.current = true;
-  pause();
-};
-
-const holdEnd = () => {
-  holding.current = false;
-  resume();
-};
-
-
-  // TAP Navigation
+  // ----- TAP & TOUCH -----
   const onTap = (e) => {
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -217,7 +165,6 @@ const holdEnd = () => {
     else paused ? resume() : pause();
   };
 
-  // TOUCH start/end for swipe
   const touchStart = (e) => {
     startX.current = e.touches[0].clientX;
     startY.current = e.touches[0].clientY;
@@ -234,7 +181,7 @@ const holdEnd = () => {
     }
   };
 
-  // Keyboard
+  // ----- KEYBOARD -----
   useEffect(() => {
     const k = (e) => {
       if (e.key === "ArrowRight") goNext();
@@ -268,25 +215,21 @@ const holdEnd = () => {
           ) : (
             <div className="sv-avatar-fallback">{current.brandName[0]}</div>
           )}
-
           <div>
             <div className="sv-brand">{current.brandName}</div>
-            <div className="sv-time">
-              {new Date(current.createdAt).toLocaleString()}
-            </div>
+            <div className="sv-time">{new Date(current.createdAt).toLocaleString()}</div>
           </div>
         </div>
 
         <button
           className="sv-close"
           onClick={(e) => {
-          e.stopPropagation();   // prevent triggering next/prev
-          navigate("/Status");
+            e.stopPropagation();
+            navigate("/Status");
           }}
         >
-         ✕
+          ✕
         </button>
-
       </div>
 
       {/* PROGRESS */}
@@ -296,12 +239,7 @@ const holdEnd = () => {
             <div
               className="sv-fill"
               style={{
-                width:
-                  i < index
-                    ? "100%"
-                    : i === index
-                    ? `${progress * 100}%`
-                    : "0%",
+                width: i < index ? "100%" : i === index ? `${progress * 100}%` : "0%",
               }}
             ></div>
           </div>
@@ -324,18 +262,12 @@ const holdEnd = () => {
           <img src={current.mediaUrl} className="sv-el" />
         )}
 
-        {current.caption && (
-          <div className="sv-caption">{current.caption}</div>
-        )}
+        {current.caption && <div className="sv-caption">{current.caption}</div>}
       </div>
 
       {/* MESSAGE BAR */}
       <div className="sv-message-bar">
-        <input
-          type="text"
-          placeholder="Message..."
-          className="sv-input"
-        />
+        <input type="text" placeholder="Message..." className="sv-input" />
         <button className="sv-send-btn">Send</button>
       </div>
     </div>
