@@ -121,20 +121,22 @@ export default function AddCaption() {
       const mediaUrl = uploadRes.data.mediaUrl;
 
       // 2️⃣ Save status with caption
-      await API.post("/api/status/create", {
+      const res= await API.post("/api/status/create", {
         mediaUrl,
         mediaType,
         caption,
       });
-
+      
       setType("success");
-      setMessage("Uploaded Successfully");
+      setMessage(res.data.message);
 
       setTimeout(() => navigate("/Status"), 1500);
     } catch (error) {
       console.error(error);
       setType("error");
-      setMessage("Failed to Upload");
+        setMessage(
+        error.response?.data?.message || "Failed to upload status"
+       );
     }
   };
 
